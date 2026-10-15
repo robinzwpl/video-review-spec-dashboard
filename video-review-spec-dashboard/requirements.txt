@@ -1,0 +1,24 @@
+# 依赖清单
+#
+# 不锁死版本：av 与 faster-whisper 的版本矩阵仍在漂移，
+# 锁死只会更快过期，这里只写下限。已验证可用的一组组合记在注释里。
+#
+# 安装（本机 pip 访问清华源会返回 403，改用阿里云源）：
+#   "C:/Program Files/Python314/python.exe" -m pip install \
+#       -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
+
+# ---- 必需 ----
+numpy>=1.26
+pillow>=10.0
+PyYAML>=6.0
+av>=18.0
+rapidocr-onnxruntime>=1.3
+
+# ---- 可选：音频转写，仅章节定位需要，缺失不影响参数提取 ----
+# faster-whisper>=1.0
+
+# ---- 可选：抽帧加速，缺失时回落 PIL 保存 ----
+# PyTurboJPEG>=1.7
+
+# 已验证组合（2026-10，Python 3.14.5 / Windows）：
+#   av 18.1.0 + rapidocr-onnxruntime + pillow 12.2.0 + numpy 2.4.6 + PyYAML
