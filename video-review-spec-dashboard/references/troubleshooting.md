@@ -18,7 +18,9 @@
 ### 2. `TypeError: metadata_errors`
 
 - **现象**：转写阶段崩溃
-- **根因**：`av` 新版本移除了 `metadata_errors` 参数，而 `faster-whisper` 仍在传它
+- **根因**：`faster-whisper` 调用 `av.open(..., metadata_errors="ignore")`，
+  而 `av` 19.0 起移除了该参数。本机实测为 **18.1.0**（该参数仍在），
+  但 `02_transcribe.py` 始终走绕过路径，以保证跨版本都能用
 - **解法**：本地已有 16kHz WAV 时，用 `wave` 读成 float32 numpy 数组，
   直接喂 `model.transcribe(array)`，绕开 `decode_audio`
 
@@ -32,7 +34,10 @@
 
 - **现象**：抽帧脚本起不来
 - **根因**：未装 PyTurboJPEG
-- **解法**：装它，或让它回落到 PIL 保存（速度略慢，226 帧的差异可忽略）
+- **解法**：`03_keyframes.py` 已内置回落——未装时自动打印提示并用 PIL 保存，
+  结果可用，只是抽帧慢一些。想提速就装 PyTurboJPEG
+  （注意：PIL 与 turbojpeg 是不同编码器，重抽的帧与既有帧会有像素级差异，
+  因此不要拿两者做逐字节比对）
 - **附注**：`turbojpeg` 的导入名是 `from turbojpeg import compress`（不是 `TurboJPEG`）；
   枚举是 `SAMP.Y420`（不是 YUV420）；参数名是 `pixelformat`（不是 `pixel_format`）；
   `subsamp` 必传

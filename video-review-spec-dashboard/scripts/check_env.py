@@ -63,9 +63,10 @@ def main():
             missing_optional.append(pkg)
     print()
 
-    # 外部工具
+    # 外部工具：本 skill 全程用 PyAV 解码，不需要 ffmpeg。
+    # 这里只是如实报告，避免使用者误以为必须先装 ffmpeg。
     ffmpeg = shutil.which("ffmpeg")
-    print(f"外部工具 ffmpeg: {'已找到 ' + ffmpeg if ffmpeg else '未找到（01_probe.py 需要）'}")
+    print(f"外部工具 ffmpeg: {'已找到 ' + ffmpeg if ffmpeg else '未找到（本 skill 不需要，全程用 PyAV 解码）'}")
     print()
 
     if not missing_required and not missing_optional:

@@ -83,7 +83,7 @@ cp config/presets/_template.yaml config/presets/我的品类.yaml
 `video-review-spec-dashboard/examples/tv75-2026-09/` 下是一次完整跑通的结果：
 
 - `tv_dashboard.html` —— 32 台 75 寸电视的分价位性能看板（单文件，双击即开）
-- `tv_specs.csv` —— 同数据的 33 行 × 25 列表格
+- `tv_specs.csv` —— 同数据的表格，32 条机型数据 + 1 行表头，共 25 列
 
 复现命令与已知限制见该目录下的 README。
 
@@ -94,7 +94,7 @@ cp config/presets/_template.yaml config/presets/我的品类.yaml
 `.gitignore` 排除了体积大或可重新生成的产物：
 
 - `科技绝对值/` —— 113MB 源视频
-- `output/` —— 226 张关键帧、日志、音频、模型、核对拼图
+- `output/` —— 226 张关键帧、日志、转写结果、核对拼图
 - `.workbuddy/` —— 项目工作数据，其中的知识已提炼进 `references/`
 
 原始过程脚本已整体迁入 skill 目录并做了通用化改造，不存在两份重复代码。
