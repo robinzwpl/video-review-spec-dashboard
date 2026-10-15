@@ -22,7 +22,8 @@ sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
 from lib import config as cfgmod
 
-MISSING = "未提取"
+# 缺失值的默认文案（配置 render.missing_label 可覆盖）
+DEFAULT_MISSING = "未提取"
 
 
 def skill_dir():
@@ -49,6 +50,8 @@ def field_defs_of(cfg, names):
 
 def build_payload(models, cfg):
     dash = cfg.get("dashboard", {})
+    render = cfg.get("render", {})
+    missing_label = render.get("missing_label", DEFAULT_MISSING)
     tiers = dash.get("tiers", [])
     price_field = dash.get("price_field", "价格")
     metrics = dash.get("metrics", [])
@@ -66,7 +69,7 @@ def build_payload(models, cfg):
         values = {}
         for name, e in p.items():
             if not e or e.get("value") is None:
-                values[name] = {"value": None, "unit": "", "display": MISSING}
+                values[name] = {"value": None, "unit": "", "display": missing_label}
                 continue
             unit = e.get("unit", "")
             val = e["value"]
@@ -109,6 +112,9 @@ def build_payload(models, cfg):
                            for n in card_fields],
             "priceField": price_field,
             "caveats": dash.get("caveats", []),
+            # 缺失值文案与图表处理方式一并注入 JS，避免 JS 里再写字面量
+            "missingLabel": missing_label,
+            "missingInChart": render.get("missing_in_chart", "gap"),
         },
         "rows": rows,
     }
@@ -166,7 +172,7 @@ __NOTE__
 <div class="notice"><strong>口径说明：</strong>__CAVEATS__</div>
 
 <div class="card"><h2>一、档位 × 核心指标</h2>
-<div class="d">每格为该档位内的最优值；灰色「未提取」表示画面未给出该字段，不做推测填充。</div>
+<div class="d">每格为该档位内的最优值；灰色「__MISSING__」表示画面未给出该字段，不做推测填充。</div>
 <div id="c1" style="height:260px"></div></div>
 
 <div class="card"><h2>二、各档位对比</h2>
@@ -186,9 +192,9 @@ __NOTE__
 <script>
 const D = __DATA__;
 const M = D.meta;
-const F = n => (n===null||n===undefined) ? '<span class="miss">未提取</span>' : n;
+const F = n => (n===null||n===undefined) ? '<span class="miss">'+M.missingLabel+'</span>' : n;
 const val = (r,k) => (r.values[k] && r.values[k].value!==null) ? r.values[k].value : null;
-const disp = (r,k) => (r.values[k] ? r.values[k].display : '未提取');
+const disp = (r,k) => (r.values[k] ? r.values[k].display : M.missingLabel);
 
 // 一、热力图
 const tiers = M.tiers, metrics = M.metrics;
@@ -216,7 +222,7 @@ echarts.init(document.getElementById('c1')).setOption({
     calculable:true,orient:'vertical',right:10,top:'center',
     inRange:{color:['#e8f4ff','#b3d9ff','#4096ff','#0050b3']}},
   series:[{type:'heatmap',data:hm,
-    label:{show:true,formatter:p=>p.value[2]==='-'?'未提取':p.value[2],fontSize:12},
+    label:{show:true,formatter:p=>p.value[2]==='-'?M.missingLabel:p.value[2],fontSize:12},
     itemStyle:{borderColor:'#fff',borderWidth:2}}]
 });
 
@@ -231,10 +237,13 @@ echarts.init(document.getElementById('c2')).setOption({
     name:m.label,type:'bar',
     data:tiers.map(t=>{
       const it=D.rows.filter(r=>r.tier===t&&val(r,m.key)!==null);
-      return it.length?Math.max(...it.map(r=>val(r,m.key))):0;
+      // 缺失值按配置处理：gap=留空（默认，铁律 M8），zero=补 0
+      // 此前无条件填 0，会让"该档没数据"看起来像"该档真的是 0"
+      return it.length?Math.max(...it.map(r=>val(r,m.key))):(M.missingInChart==='zero'?0:null);
     }),
     itemStyle:{color:['#4096ff','#52c41a','#fa8c16','#722ed1','#eb2f96'][i%5]},
-    label:{show:true,position:'top',fontSize:11,formatter:p=>p.value===0?'':p.value}
+    label:{show:true,position:'top',fontSize:11,
+      formatter:p=>(p.value===null||p.value===undefined)?'':p.value}
   }))
 });
 
@@ -281,7 +290,8 @@ function renderTable(){
     h += '<tr><td>'+(r.tier||'-')+'</td><td>'+r.brand+'</td><td>'+r.model+'</td>'
       + M.cardFields.map(f=>{
           const e=r.values[f.key];
-          return '<td>'+((e && e.value!==null) ? e.display : '<span class="miss">未提取</span>')+'</td>';
+          return '<td>'+((e && e.value!==null) ? e.display
+            : '<span class="miss">'+M.missingLabel+'</span>')+'</td>';
         }).join('')
       + '</tr>';
   });
@@ -319,13 +329,32 @@ def main():
     payload = build_payload(models, cfg)
     meta = payload["meta"]
 
-    # 内嵌 ECharts：CDN 不可达时图表会空白且无报错，故默认内嵌
-    echarts_path = os.path.join(skill_dir(), "assets", "echarts.min.js")
-    with open(echarts_path, encoding="utf-8") as f:
-        echarts_src = f.read()
+    # 内嵌 ECharts：CDN 不可达时图表会空白且无报错，故默认内嵌。
+    # 置 render.inline_echarts=false 则改用 CDN（会打印醒目警告）
+    render = cfg.get("render", {})
+    inline = render.get("inline_echarts", True)
+    if inline:
+        echarts_path = os.path.join(skill_dir(), "assets", "echarts.min.js")
+        if not os.path.exists(echarts_path):
+            print(f"错误：找不到 {echarts_path}；"
+                  f"可置 render.inline_echarts=false 改用 CDN", file=sys.stderr)
+            sys.exit(1)
+        with open(echarts_path, encoding="utf-8") as f:
+            echarts_src = f.read()
+        echarts_tag = f"<script>{echarts_src}</script>"
+    else:
+        cdn = render.get(
+            "echarts_cdn_url",
+            "https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js")
+        print("警告：inline_echarts=false，改用 CDN 加载 ECharts。"
+              "CDN 不可达时图表会一片空白且不报错（见 troubleshooting 第 3 条）",
+              flush=True)
+        echarts_tag = f'<script src="{cdn}"></script>'
 
+    missing_label = meta["missingLabel"]
     caveats = "".join(f"<br>{i+1}. {c}" for i, c in enumerate(meta["caveats"]))
-    caveats += f"<br>{len(meta['caveats'])+1}. 标注「未提取」表示画面未给出该字段，不做推测填充。"
+    caveats += (f"<br>{len(meta['caveats'])+1}. 标注「{missing_label}」"
+                f"表示画面未给出该字段，不做推测填充。")
 
     html = (HTML_TMPL
             .replace("__TITLE__", meta["title"])
@@ -334,7 +363,8 @@ def main():
             .replace("__NOTE__", meta["note"])
             .replace("__CAVEATS__", caveats)
             .replace("__N__", str(len(payload["rows"])))
-            .replace("__ECHARTS__", echarts_src)
+            .replace("__MISSING__", missing_label)
+            .replace("<script>__ECHARTS__</script>", echarts_tag)
             .replace("__DATA__", json.dumps(payload, ensure_ascii=False)))
 
     os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)
@@ -344,8 +374,8 @@ def main():
     print(f"输出: {args.output}", flush=True)
     print(f"条目数: {len(payload['rows'])}，档位数: {len(meta['tiers'])}", flush=True)
     print(f"核心指标: {[m['label'] for m in meta['metrics']]}", flush=True)
-    print(f"体积: {len(html.encode('utf-8')) / 1024:.0f} KB（内嵌 ECharts，无外部依赖）",
-          flush=True)
+    tail = "内嵌 ECharts，无外部依赖" if inline else "CDN 加载 ECharts"
+    print(f"体积: {len(html.encode('utf-8')) / 1024:.0f} KB（{tail}）", flush=True)
 
 
 if __name__ == "__main__":

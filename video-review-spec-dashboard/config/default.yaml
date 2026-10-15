@@ -42,7 +42,12 @@ render:
   missing_label: "未提取"
   # 看板中是否内联 ECharts（CDN 不可达时必须为 true）
   inline_echarts: true
+  # inline_echarts=false 时使用的 CDN 地址
+  # 注意：本机 jsdelivr 不可达，改 false 前请先确认该地址可用，
+  #       否则图表会一片空白且不报错（见 troubleshooting 第 3 条）
+  echarts_cdn_url: "https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"
   # 缺失值在图表中的处理方式：gap（留空）或 zero（补零）
+  # 默认必须是 gap —— 补零会让"没数据"看起来像"真的是 0"（铁律 M8）
   missing_in_chart: "gap"
 
 # ------------------------------------------------------------

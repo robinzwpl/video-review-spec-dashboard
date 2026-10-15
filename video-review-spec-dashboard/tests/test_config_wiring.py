@@ -21,11 +21,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SKILL_ROOT = os.path.dirname(HERE)
 
 # 临时豁免：已知尚未接线，接线后必须从此列表移除
-# 否则守卫形同虚设
-PENDING_WIRING = {
-    "inline_echarts",    # 09_dashboard.py 无条件内嵌，待改为读配置
-    "missing_in_chart",  # 09_dashboard.py 柱状图缺失值处理，待改为读配置
-}
+# 否则守卫形同虚设。当前为空——所有配置项都应有真实消费者。
+PENDING_WIRING = set()
 
 
 def leaf_keys(node, prefix=""):

@@ -19,6 +19,8 @@ sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 
 from lib import config as cfgmod
 
+# 缺失值文案。main 会从配置的 render.missing_label 读取并覆盖，
+# 未配置时保持此默认值（铁律 M8：缺失一律标注，不填 0、不推测填充）
 MISSING = "未提取"
 
 
@@ -246,6 +248,10 @@ def main():
     args = ap.parse_args()
 
     cfg = cfgmod.load_config(args.preset)
+
+    global MISSING
+    MISSING = cfg.get("render", {}).get("missing_label", MISSING)
+
     with open(args.input, encoding="utf-8") as f:
         models = json.load(f)
 
