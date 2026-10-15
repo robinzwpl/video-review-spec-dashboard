@@ -122,3 +122,28 @@ dashboard:
     - {field: "主参数一", key: "metric1", label: "主参数一"}
   color_std_groups: []
   caveats: []
+
+  # --- 两个可选板块，留空/关闭则不出现在看板里 ---
+
+  # 特殊技术特性：展示 preset 的 specials 匹配结果，按 type 或 owner 归类
+  # 需要先把 specials 匹配规则填上，否则该板块无数据可展示
+  special_section:
+    enabled: false
+    title: "特殊技术特性"
+    desc: "各条目独有的技术，按类型归类。这些是同档位内的差异化要素。"
+    group_by: "type"        # type=按技术类型，owner=按归属品牌
+    highlight_brands: []    # 标红的品牌，仅用于快速定位，不代表推荐
+
+  # 选购建议：必须人工写的解读，不是自动生成
+  # 自动生成的"建议"会把口径陷阱当成结论输出，所以这里只接收人写的文本
+  advice: []
+  # 写法示例（取消注释即可用）：
+  # advice:
+  #   - title: "推荐关注"
+  #     level: good          # good=绿框，warn=橙框
+  #     items:
+  #       - "某某档位：共 N 款，平均指标约 X，适合……"
+  #   - title: "需权衡 / 谨慎"
+  #     level: warn
+  #     items:
+  #       - "指标 A 与指标 B 量纲不同，不可直接比较大小"

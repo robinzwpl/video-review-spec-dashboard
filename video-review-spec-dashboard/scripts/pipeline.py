@@ -20,6 +20,7 @@
 import os
 import sys
 import glob
+import json
 import argparse
 import subprocess
 
@@ -141,12 +142,27 @@ def build_cmd(no, ctx):
             cmd += ["--max-duration", str(ctx["max_duration"])]
         return cmd
     if no == 4:
-        # TODO(B3b): 04 改造为 argparse 后改为 --out-dir --preset
-        return [py, s, out_dir]
+        # 未给 preset 时 04 只识别通用区，这是新视频第一遍探查的正常用法
+        cmd = [py, s, "--out-dir", out_dir]
+        if ctx["preset"]:
+            cmd += ["--preset", ctx["preset"]]
+        return cmd
     if no == 5:
         cmd = [py, s, "--input", paths["frames_ocr"], "--output", paths["layout"]]
         if ctx.get("emit_preset"):
             cmd += ["--emit-preset", ctx["emit_preset"]]
+            # 草稿里的区域是比例坐标，必须知道真实分辨率才能换算；
+            # 01 阶段探测过就直接用，否则 05 会退回 1920x1080 的假设
+            info_path = paths["video_info"]
+            if os.path.exists(info_path):
+                try:
+                    with open(info_path, encoding="utf-8") as f:
+                        info = json.load(f)
+                    if info.get("width") and info.get("height"):
+                        cmd += ["--width", str(info["width"]),
+                                "--height", str(info["height"])]
+                except (OSError, ValueError):
+                    pass
         return cmd
     if no == 6:
         return [py, s, "--preset", ctx["preset"],
@@ -338,6 +354,7 @@ def main():
 
     os.makedirs(out_dir, exist_ok=True)
     paths = {
+        "video_info": os.path.join(out_dir, out.get("video_info_json", "video_info.json")),
         "wav": os.path.join(out_dir, out.get("audio_wav", "audio_16k.wav")),
         "keyframes": os.path.join(out_dir, out.get("keyframes_json", "keyframes.json")),
         "frames_dir": os.path.join(out_dir, out.get("frames_dir", "frames")),

@@ -82,7 +82,9 @@ cp config/presets/_template.yaml config/presets/我的品类.yaml
 
 `video-review-spec-dashboard/examples/tv75-2026-09/` 下是一次完整跑通的结果：
 
-- `tv_dashboard.html` —— 32 台 75 寸电视的分价位性能看板（单文件，双击即开）
+- `tv_dashboard.html` —— 32 台 75 寸电视的分价位性能看板（单文件，双击即开）。
+  共 6 个板块：档位 × 核心指标热力图、各档位对比柱状图、各档位画像卡、
+  特殊技术特性、选购建议、完整参数明细
 - `tv_specs.csv` —— 同数据的表格，32 条机型数据 + 1 行表头，共 25 列
 
 复现命令与已知限制见该目录下的 README。

@@ -7,53 +7,49 @@ OCR 增强版：针对实际画面的预处理 + 分区域识别。
 2. 字幕固定在底部、白字黑描边 -> 单独裁切底部区域，识别率大幅提升
 3. 左侧常有品牌水印混在参数里 -> 靠坐标过滤掉边缘窄条
 
-策略：
-- 整帧识别一遍（抓画面中央的参数表/贴纸）
-- 底部字幕条单独裁切再识别一遍（抓口播字幕，拿章节结构）
+区域坐标全部来自配置（config/default.yaml 的 ocr.regions 放通用区，
+品类预设放专属区如底部横排栏分段），不在代码里写死。
+
+用法：
+    python 04_ocr.py --out-dir output [--preset tv75_science] [--no-enhance]
+    python 04_ocr.py output                  # 位置参数，兼容旧调用
+
+不给 --preset 时只识别通用区（card_main + subtitle），用于新视频的第一遍探查；
+填好 preset 后需要带 --preset 再跑一遍，才会得到底部栏的 region 标注。
 """
 import os
 import sys
 import json
 import time
+import argparse
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import numpy as np
 from PIL import Image, ImageEnhance
 
+from lib import config as cfgmod
 
-# 画面分区（基于 1920x1080 观察，可按实际分辨率等比缩放）
-def get_regions(width, height):
+
+def build_regions(cfg, width, height):
     """
-    返回要识别的区域列表。坐标格式: (名称, x1比例, y1比例, x2比例, y2比例)
+    按配置构建要识别的区域列表，返回 [(名称, x1, y1, x2, y2)]（像素坐标）。
 
-    实测画面有两种参数卡版式（基于 1920x1080 逐帧扫描确定）：
-      A) 主区竖排：标签/值在 y 240-860，x 480-1400
-         （屏幕 / 背光分区 / 亮度范围 / 原生刷新 / 色域）
-      B) 底部横排栏：y 920-1005，四组字段
-         标签行 y≈920-945，数值行 y≈960-1005
+    顺序由配置里的 order 决定，不依赖 YAML 书写顺序——
+    两层配置合并后键的排列是「默认在前、预设在后」，靠书写顺序会乱。
 
-    **底部横排栏与口播字幕位置重叠**（字幕居中约 x 600-1340），
-    整行识别会被字幕污染（实测得到
-    "2GB/64GB第三台合 Vidda>钢SM8ni四核A55"）。
-    因此底部改为**按实测 x 范围分段识别，跳过字幕所在的中间段**：
-      组1 x 150-560  运行内存/存储 -> 实测干净输出['2GB','64GB']
-      组2 x 620-900HDMI 2.1/2.0   -> 常被字幕压住
-      组3 x 960-1180  发声单元      -> 常被字幕压住
-      组4 x 1340-1800 处理器        -> 实测干净输出['四核A55']
-    被字幕遮挡的组若识别不到，保留「未提取」，不推测填充。
+    像素换算用 int() 截断（不是 round）：历史上就是这样算的，
+    改成 round 会让所有框偏移 1 像素，导致与既有 OCR 产物对不上。
     """
-    return [
-        # 参数卡主区：屏幕/分区/亮度/刷新/色域
-        ("card_main", 0.02, 0.05, 0.98, 0.86),
-        # 底部横排栏 · 标签行
-        ("footer_label", 0.02, 0.845, 0.98, 0.88),
-        # 底部横排栏 · 数值行四段（避开字幕居中区）
-        ("footer_v1", 0.078, 0.883, 0.292, 0.935),   # x150-560  内存/存储
-        ("footer_v2", 0.323, 0.883, 0.469, 0.935),   # x620-900  HDMI
-        ("footer_v3", 0.500, 0.883, 0.615, 0.935),   # x960-1180 发声单元
-        ("footer_v4", 0.698, 0.883, 0.938, 0.935),   # x1340-1800 处理器
-        # 口播字幕（单独识别用于章节定位）
-        ("subtitle", 0.02, 0.86, 0.98, 0.999),
-    ]
+    regions = cfg.get("ocr", {}).get("regions", {})
+    items = sorted(regions.items(), key=lambda kv: kv[1].get("order", 50))
+    out = []
+    for name, r in items:
+        rx1, ry1, rx2, ry2 = r["box"]
+        out.append((name,
+                    int(width * rx1), int(height * ry1),
+                    int(width * rx2), int(height * ry2)))
+    return out
 
 
 def preprocess(img, enhance=True):
@@ -68,29 +64,16 @@ def preprocess(img, enhance=True):
     return img
 
 
-def split_footer(crop, n=4):
+def run_ocr(frames, out_dir, cfg=None, do_enhance=True,
+            output_name="frames_ocr.json", write_dir=None):
     """
-    底部横排数值行按x 四等分切开。
+    对每个关键帧跑 OCR，多区域识别。
 
-    实测该行为「运行内存/存储 | HDMI2.1 | 发声单元 | 处理器」四组等距排列，
-    但 RapidOCR 会把整行识别成一个文本框并相互粘连
-    （实测得到 "2GB64GBEA00aHSnoA55"，其中 EA00aH 是 "HDMI2.0 4个" 的误识）。
-    按 x 切分后逐段识别，可显著降低粘连导致的误识。
+    :param out_dir: 关键帧所在目录（frame_path 是相对它的相对路径）
+    :param write_dir: 结果写入目录，默认与 out_dir 相同
     """
-    w, h = crop.size
-    # 左右各留 1% 边距，避免切到相邻字段边缘
-    m = int(w * 0.01)
-    seg_w = (w - 2 * m) // n
-    out = []
-    for i in range(n):
-        x0 = m + i * seg_w
-        x1 = m + (i + 1) * seg_w if i < n - 1 else w - m
-        out.append(crop.crop((x0, 0, x1, h)))
-    return out
-
-
-def run_ocr(frames, out_dir, do_enhance=True):
-    """对每个关键帧跑 OCR，多区域识别。"""
+    if cfg is None:
+        cfg = cfgmod.load_base()
     from rapidocr_onnxruntime import RapidOCR
 
     print("正在加载 OCR 模型...", flush=True)
@@ -122,9 +105,7 @@ def run_ocr(frames, out_dir, do_enhance=True):
         W, H = img.size
         all_texts = []
 
-        for region_name, rx1, ry1, rx2, ry2 in get_regions(W, H):
-            x1, y1 = int(W * rx1), int(H * ry1)
-            x2, y2 = int(W * rx2), int(H * ry2)
+        for region_name, x1, y1, x2, y2 in build_regions(cfg, W, H):
             crop = img.crop((x1, y1, x2, y2))
             crop = preprocess(crop, do_enhance)
 
@@ -166,7 +147,7 @@ def run_ocr(frames, out_dir, do_enhance=True):
         if (i + 1) % 50 == 0:
             print(f"  OCR 进度 {i+1}/{len(frames)}，用时 {time.time()-t0:.0f}s", flush=True)
 
-    ocr_path = os.path.join(out_dir, "frames_ocr.json")
+    ocr_path = os.path.join(write_dir or out_dir, output_name)
     with open(ocr_path, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
 
@@ -179,14 +160,42 @@ def run_ocr(frames, out_dir, do_enhance=True):
 
 
 def main():
-    out_dir = sys.argv[1]
-    meta_path = os.path.join(out_dir, "keyframes.json")
+    ap = argparse.ArgumentParser(description="分区域 OCR（坐标来自配置）")
+    ap.add_argument("out_dir_pos", nargs="?", default=None,
+                    help="输出目录（位置参数，兼容旧调用）")
+    ap.add_argument("--out-dir", default=None)
+    ap.add_argument("--preset", default=None,
+                    help="品类预设名；不给则只识别通用区（新视频探查用）")
+    ap.add_argument("--input", default=None, help="keyframes.json 路径")
+    ap.add_argument("--output", default=None, help="输出 frames_ocr.json 路径")
+    ap.add_argument("--no-enhance", action="store_true",
+                    help="关闭对比度/锐化增强")
+    args = ap.parse_args()
 
+    out_dir = args.out_dir or args.out_dir_pos or "output"
+    cfg = (cfgmod.load_config(args.preset) if args.preset
+           else cfgmod.load_base())
+    out = cfg.get("output", {})
+
+    if not args.preset:
+        print("提示: 未指定 --preset，只识别通用区（card_main / subtitle）；"
+              "填好预设后需带 --preset 再跑一遍，才会得到底部栏的 region 标注",
+              flush=True)
+
+    meta_path = args.input or os.path.join(
+        out_dir, out.get("keyframes_json", "keyframes.json"))
     with open(meta_path, encoding="utf-8") as f:
         frames = json.load(f)
     print(f"载入关键帧清单: {len(frames)} 帧", flush=True)
 
-    run_ocr(frames, out_dir, do_enhance=True)
+    if args.output:
+        # 帧始终从 out_dir 读，结果写到 --output 指定的路径
+        run_ocr(frames, out_dir, cfg, do_enhance=not args.no_enhance,
+                output_name=os.path.basename(args.output),
+                write_dir=os.path.dirname(os.path.abspath(args.output)))
+    else:
+        run_ocr(frames, out_dir, cfg, do_enhance=not args.no_enhance,
+                output_name=out.get("frames_ocr_json", "frames_ocr.json"))
 
 
 if __name__ == "__main__":

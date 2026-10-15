@@ -90,8 +90,24 @@ cp config/presets/_template.yaml config/presets/<你的品类>.yaml
 | `identity.brand_map` | 品牌识别表 | 留空则不识别品牌，整行标题当型号 |
 | `footer_regions` | 底部横排栏的区域划分 | 留空则跳过底部栏提取 |
 
-不确定画面版式时，先跑 `05_discover.py` 生成版式报告，它会统计跨帧标签频次、
-给出标题行与底部栏的建议边界，照着填即可。
+不确定画面版式时，先跑 `05_discover.py`：它统计跨帧标签频次，给出标题行与底部栏的
+建议边界，还能直接起草一份 preset。
+
+```bash
+# 出报告 + 起草 preset（草稿里带 # TODO 的行必须人工确认）
+$PY scripts/05_discover.py --input output/frames_ocr.json \
+    --output output/layout_report.md \
+    --emit-preset config/presets/<你的品类>.yaml --width 1920 --height 1080
+```
+
+草稿会铺好字段表、填好建议阈值、给底部栏一个区域骨架，但字段 `type` 一律先给
+`text` 并标 `# TODO`——类型判定依赖对品类规格的理解，自动推断的错配会静默污染
+数据，不如让人确认。底部栏的 x 边界同样不自动推断：**等分切是错的**，需照拼图
+逐段量。
+
+**新视频要跑两遍 OCR。** 第一遍还没有 preset，04 只识别通用区（`card_main`、
+`subtitle`），这一遍的产物用来探查版式；填完 preset 再跑第二遍，才会有底部栏等
+品类专属区域的标注。
 
 ### 第三步：跑流水线
 
@@ -117,8 +133,8 @@ $PY scripts/06_parse.py --preset tv75_science \
 | 1 探测/音频 | `01_probe.py` | 视频信息、`audio_16k.wav` | |
 | 2 转写（可选） | `02_transcribe.py` | `transcript.json` | 需要 faster-whisper 模型；**缺了也能出全套产物**，只是少了章节定位 |
 | 3 抽帧 | `03_keyframes.py` | `frames/*.jpg`、`keyframes.json` | 差异自适应，不靠固定间隔 |
-| 4 OCR | `04_ocr.py` | `frames_ocr.json` | 分区域识别 + 预处理 |
-| 5 版式探查 | `05_discover.py` | `layout_report.md` | 新视频先跑它，省去手量坐标 |
+| 4 OCR | `04_ocr.py` | `frames_ocr.json` | 分区域识别（坐标来自配置）+ 预处理；新视频第一遍不给 `--preset` |
+| 5 版式探查 | `05_discover.py` | `layout_report.md`、可选 preset 草稿 | 新视频先跑它，省去手量坐标 |
 | 6 参数解析 | `06_parse.py` | `models.json` | 核心环节，配置驱动 |
 | 7 人工核对 | `07_contact_sheet.py` | `contact_sheet_*.jpg` | 分批出图逐项核对 |
 | 8 核对表 | `08_specs_table.py` | `specs.csv`、`specs_table.html` | 全字段平铺 |
@@ -168,6 +184,20 @@ $PY scripts/06_parse.py --preset tv75_science \
 **注意**：只有 `text_short` 会做短文本兜底收录。数值类字段解析不出就是解析不出，
 不会拿原文凑数，否则会污染数值字段。
 
+类型怎么选、各类型的内置假设见 `references/field-cookbook.md`。
+
+### 看板的两个可选板块
+
+| 配置段 | 板块 | 留空会怎样 |
+|---|---|---|
+| `dashboard.special_section.enabled` | 特殊技术特性（按 `type` 或 `owner` 归类） | 不出现该板块 |
+| `dashboard.advice` | 选购建议 | 不出现该板块 |
+
+两个板块都在「完整参数明细」之前，没配就自动不出现，序号顺延，不留空占位。
+
+选购建议**必须人工写**，工具不生成：自动生成的"建议"会把口径陷阱当成结论输出。
+`level` 取 `good`（绿框）或 `warn`（橙框）。
+
 ---
 
 ## 6. Troubleshooting
@@ -183,6 +213,9 @@ $PY scripts/06_parse.py --preset tv75_science \
 | 底部栏字段大量缺失 | 按等分切分区域无效 | 必须按**实测 x 边界**切分，实测覆盖率可从 2/32 提升到 31/32 |
 | 型号被识别成 "P3" | 色域标准词被当成型号 | 填 `identity.model_negative` 负向词表 |
 | 开篇总览页导致错配 | 多机型卡片同屏，文本框混杂 | 设 `exclude_before_sec` 整体丢弃该时间点之前的帧 |
+| 底部栏区域配了却抽不到值 | `footer_regions` 的键名与 `ocr.regions` 里的区域名对不上，**不报错，只静默丢字段** | 加载配置时会校验这个契约，键名写错会直接抛错；报错信息里列出已有区域名 |
+| 数值数量级明显不对（如分区数 10020） | OCR 丢了连字符：「100-200级」被连读成「100200级」 | 数值异常时回看 `raw` 原文与原始帧；必要时在 `overrides` 里人工回填 |
+| 换品类后某类字段静默失效 | 通用 handler 里残留了电视领域的字面量假设（见 field-cookbook 第五章） | 换品类前先过一遍那 6 处假设 |
 
 ---
 

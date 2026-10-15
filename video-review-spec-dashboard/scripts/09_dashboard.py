@@ -11,7 +11,11 @@ JS 只负责按元数据渲染，不认识任何具体品类。
   一、档位 × 核心指标 热力图
   二、档位对比柱状图
   三、各档位画像卡
-  四、完整参数明细表
+  四、特殊技术特性（可选，dashboard.special_section.enabled 控制）
+  五、选购建议（可选，dashboard.advice 非空才出现）
+  六、完整参数明细表
+
+后两个是可选板块：preset 没配就不出现，序号自动顺延，不留空占位。
 """
 import os
 import sys
@@ -46,6 +50,58 @@ def field_defs_of(cfg, names):
     for n in names:
         out.append(by_name.get(n, {"name": n, "label": n, "type": "text_short"}))
     return out
+
+
+# 板块序号用的中文数字，最多排到八
+CN_NUM = ["一", "二", "三", "四", "五", "六", "七", "八"]
+
+
+def _special_section_meta(dash):
+    """「特殊技术特性」板块的渲染参数；未启用则返回 None。"""
+    sec = dash.get("special_section") or {}
+    if not sec.get("enabled", False):
+        return None
+    return {
+        "title": sec.get("title", "特殊技术特性"),
+        "desc": sec.get("desc", ""),
+        "groupBy": sec.get("group_by", "type"),
+        "highlight": sec.get("highlight_brands", []),
+    }
+
+
+def build_sections(cfg, next_idx):
+    """
+    拼装两个可选板块的 HTML，并给出下一个可用的序号。
+
+    板块顺序沿用旧版看板：特殊技术特性 → 选购建议 → 完整参数明细。
+    两个板块都来自 preset，没有配置就不出现，不留空占位。
+    """
+    dash = cfg.get("dashboard", {})
+    out = []
+
+    if _special_section_meta(dash):
+        sec = _special_section_meta(dash)
+        out.append(
+            f'<div class="card"><h2>{CN_NUM[next_idx]}、{sec["title"]}</h2>\n'
+            f'<div class="d">{sec["desc"]}</div>\n'
+            f'<div id="c4"></div></div>')
+        next_idx += 1
+
+    advice = dash.get("advice") or []
+    if advice:
+        boxes = "".join(
+            f'<div class="rb {a.get("level", "")}">'
+            f'<h3>{a.get("title", "")}</h3><ul>'
+            + "".join(f"<li>{it}</li>" for it in a.get("items", []))
+            + "</ul></div>"
+            for a in advice)
+        out.append(
+            f'<div class="card"><h2>{CN_NUM[next_idx]}、选购建议</h2>\n'
+            f'<div class="d">基于本视频的价格带与指标分布，非厂商推荐。</div>\n'
+            f'<div class="rec">{boxes}</div></div>')
+        next_idx += 1
+
+    return "\n\n".join(out), next_idx
 
 
 def build_payload(models, cfg):
@@ -90,7 +146,11 @@ def build_payload(models, cfg):
             "price": price,
             "tier": tier_of(price, tiers),
             "values": values,
-            "specials": [s.get("name") for s in m.get("specials", [])],
+            # 保留 type / owner：「特殊技术特性」板块要按它们归类
+            "specials": [{"name": s.get("name", ""),
+                          "type": s.get("type", ""),
+                          "owner": s.get("owner", "")}
+                         for s in m.get("specials", [])],
             "notes": [n.get("note_text", "") for n in m.get("notes", [])],
             "ts": m.get("first_seen", 0),
             "verified": bool(m.get("verified")),
@@ -112,6 +172,12 @@ def build_payload(models, cfg):
                            for n in card_fields],
             "priceField": price_field,
             "caveats": dash.get("caveats", []),
+            # 两个可选板块的内容：都由 preset 提供，空则不渲染
+            "advice": [{"title": a.get("title", ""),
+                        "level": a.get("level", ""),
+                        "items": a.get("items", [])}
+                       for a in (dash.get("advice") or [])],
+            "specialSection": _special_section_meta(dash),
             # 缺失值文案与图表处理方式一并注入 JS，避免 JS 里再写字面量
             "missingLabel": missing_label,
             "missingInChart": render.get("missing_in_chart", "gap"),
@@ -156,6 +222,13 @@ HTML_TMPL = r"""<!DOCTYPE html>
  .tc td{padding:3px 0;vertical-align:top}
  .tc td.k{color:#8f959e;width:38%}
  .tc td.v{font-variant-numeric:tabular-nums}
+ .chip.hl{background:#fff1f0;color:#cf1322}
+ .rec{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+ .rb{border:1px solid #e5e6eb;border-radius:7px;padding:13px 15px;background:#fcfcfd}
+ .rb h3{font-size:14px;margin-bottom:7px}
+ .rb ul{padding-left:18px;font-size:12.5px;line-height:1.95;color:#4a5058}
+ .rb.good{border-left:3px solid #52c41a}
+ .rb.warn{border-left:3px solid #fa8c16}
  .tblwrap{overflow:auto}
  table.all{border-collapse:collapse;font-size:12.5px;white-space:nowrap;width:100%}
  table.all th{background:#f7f8fa;padding:8px;text-align:left;font-weight:600;
@@ -184,7 +257,9 @@ __NOTE__
 <div class="tierbar" id="tierbar"></div>
 <div id="c3"></div></div>
 
-<div class="card"><h2>四、完整参数明细</h2>
+__EXTRA_SECTIONS__
+
+<div class="card"><h2>__DETAIL_NO__、完整参数明细</h2>
 <div class="d">全部 __N__ 条逐条列出。</div>
 <div class="tblwrap"><table class="all" id="c5"></table></div></div>
 
@@ -261,7 +336,7 @@ function renderTiers(){
       <div class="miss">该档位暂未提取到条目</div></div>`;
     const cards = items.slice(0,6).map(r=>{
       const chips = r.specials.length
-        ? '<div class="chips">'+r.specials.map(n=>`<span class="chip">${n}</span>`).join('')+'</div>'
+        ? '<div class="chips">'+r.specials.map(s=>`<span class="chip">${s.name}</span>`).join('')+'</div>'
         : '';
       const rowsHtml = M.cardFields.map(f=>{
         const e = r.values[f.key];
@@ -281,7 +356,36 @@ function renderTiers(){
   }).join('');
 }
 
-// 四、明细表
+// 特殊技术特性（可选板块：preset 未启用时 DOM 里没有 #c4，整段跳过）
+const c4=document.getElementById('c4');
+if(c4){
+  const S=M.specialSection||{};
+  const keyOf=s=>S.groupBy==='owner'?(s.owner||'未标注归属'):(s.type||'其他');
+  const groups={};
+  D.rows.forEach(r=>{
+    (r.specials||[]).forEach(s=>{
+      const k=keyOf(s);
+      const g=groups[k]=groups[k]||{items:[],seen:new Set(),n:0};
+      g.n++;   // 按机型计数；同名技术在同一品牌的多款机型上只显示一次
+      const key=r.brand+'|'+s.name;
+      if(g.seen.has(key))return;
+      g.seen.add(key);
+      g.items.push({brand:r.brand,model:r.model,name:s.name});
+    });
+  });
+  const hl=S.highlight||[];
+  c4.innerHTML=Object.keys(groups).map(k=>`
+    <div style="margin-bottom:16px">
+      <div style="font-size:14px;font-weight:600;margin-bottom:8px">${k}
+        <span class="tag">${groups[k].n} 个机型采用</span></div>
+      <div class="chips">${groups[k].items.map(x=>
+        `<span class="chip${hl.indexOf(x.brand)>=0?' hl':''}" title="${x.brand} ${x.model}"
+         >${x.name}<span style="opacity:.65"> · ${x.brand}</span></span>`).join('')}
+      </div>
+    </div>`).join('') || '<div class="miss">未提取到特殊技术特性</div>';
+}
+
+// 明细表
 function renderTable(){
   const cols = ['档位','品牌','型号'].concat(M.cardFields.map(f=>f.label));
   const list = curTier ? D.rows.filter(r=>r.tier===curTier) : D.rows;
@@ -329,6 +433,10 @@ def main():
     payload = build_payload(models, cfg)
     meta = payload["meta"]
 
+    # 可选板块在前，明细表在后，序号顺延
+    extra, detail_idx = build_sections(cfg, next_idx=3)
+    detail_no = CN_NUM[min(detail_idx, len(CN_NUM) - 1)]
+
     # 内嵌 ECharts：CDN 不可达时图表会空白且无报错，故默认内嵌。
     # 置 render.inline_echarts=false 则改用 CDN（会打印醒目警告）
     render = cfg.get("render", {})
@@ -363,6 +471,8 @@ def main():
             .replace("__NOTE__", meta["note"])
             .replace("__CAVEATS__", caveats)
             .replace("__N__", str(len(payload["rows"])))
+            .replace("__EXTRA_SECTIONS__", extra)
+            .replace("__DETAIL_NO__", detail_no)
             .replace("__MISSING__", missing_label)
             .replace("<script>__ECHARTS__</script>", echarts_tag)
             .replace("__DATA__", json.dumps(payload, ensure_ascii=False)))

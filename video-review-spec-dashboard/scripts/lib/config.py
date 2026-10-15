@@ -9,6 +9,7 @@
 两层做深度合并，预设覆盖默认。缺失必填项直接报错，不做静默降级。
 """
 import os
+import sys
 
 import yaml
 
@@ -39,10 +40,47 @@ def deep_merge(base, override):
     return out
 
 
+def _validate_regions(cfg):
+    """
+    校验 OCR 区域与底部栏抽取器的契约。
+
+    区域名是两层配置之间的接口：04 按 ocr.regions 的 box 裁切并打上 region 名，
+    06 再按 footer_regions 的键名找抽取器。名字对不上不会报错，
+    只会静默丢字段，所以在加载时就要拦住。
+    """
+    regions = cfg.get("ocr", {}).get("regions", {})
+    footers = cfg.get("footer_regions", {})
+
+    # 规则 1（错误）：抽取器指向的区域必须存在
+    for key in footers:
+        if key not in regions:
+            raise ValueError(
+                f"footer_regions.{key} 在 ocr.regions 里没有同名区域；"
+                f"已有区域: {sorted(regions)}")
+
+    # 规则 2（警告）：识别了数值区却没有抽取器，该段文字不会被提取
+    for name, r in regions.items():
+        if r.get("role") == "footer_value" and name not in footers:
+            print(f"警告：区域 {name} 已识别但没有 footer_regions 抽取器，"
+                  f"该段文字不会被提取", file=sys.stderr)
+
+    # 规则 3（错误）：box 必须是 4 个 0-1 的比例值，且左上 < 右下
+    for name, r in regions.items():
+        b = r.get("box")
+        if not (isinstance(b, list) and len(b) == 4):
+            raise ValueError(f"ocr.regions.{name}.box 必须是 4 个数，实际: {b}")
+        if not all(isinstance(v, (int, float)) and 0.0 <= v <= 1.0 for v in b):
+            raise ValueError(f"ocr.regions.{name}.box 必须都在 0-1 之间: {b}")
+        if b[0] >= b[2] or b[1] >= b[3]:
+            raise ValueError(
+                f"ocr.regions.{name}.box 坐标写反了（左上应小于右下）: {b}")
+
+
 def validate(cfg):
     """校验必填项，缺项直接抛错。"""
     if not cfg.get("fields"):
         raise ValueError("配置缺少 fields 字段表，无法进行参数解析")
+    _validate_regions(cfg)
     seen = set()
     for fd in cfg["fields"]:
         if not fd.get("name"):
