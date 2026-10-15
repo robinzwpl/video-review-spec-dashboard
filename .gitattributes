@@ -1,0 +1,9 @@
+# 统一行尾：仓库内一律存 LF，避免跨平台协作时 diff 被行尾差异污染
+* text=auto eol=lf
+
+# 二进制与体积较大的资源不做行尾转换
+*.jpg binary
+*.png binary
+*.mp4 binary
+*.wav binary
+*.min.js binary
