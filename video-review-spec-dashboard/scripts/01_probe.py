@@ -1,26 +1,68 @@
 # -*- coding: utf-8 -*-
 """
-从视频中提取音频并转写为带时间戳的文本。
-使用 PyAV 解码 mp4（无需 ffmpeg），faster-whisper 做语音识别。
+视频探测 + 音频提取（流水线第 1 阶段）。
+
+只做两件事：
+  1. 探测视频元信息 -> video_info.json（分辨率 / 时长 / 帧率 / 编码 / 音频轨）
+  2. 提取 16kHz 单声道 WAV -> audio_16k.wav（供 02 转写消费）
+
+不做语音识别 —— 那是 02 的职责。早期版本把转写也塞在本脚本里，
+导致与 02 功能重复，且用的是会触发 av 版本冲突的调用路径，已删除。
+用 PyAV 解码，不需要额外的 ffmpeg。
+
+用法：
+    python 01_probe.py --video <视频> --out-dir <目录>
+    python 01_probe.py --video <视频> --out-dir <目录> --skip-audio
 """
 import os
 import sys
 import json
-import time
+import argparse
 
-# 输入视频路径通过命令行参数传入
-VIDEO_PATH = sys.argv[1]
-OUTPUT_DIR = sys.argv[2]
-MODEL_SIZE = sys.argv[3] if len(sys.argv) > 3 else "small"
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+from lib import config as cfgmod
 
-# ==================== 第一步：提取音频 ====================
+
+def probe_video(video_path):
+    """用 PyAV 读取视频元信息。"""
+    import av
+
+    info = {"path": os.path.abspath(video_path)}
+    with av.open(video_path) as container:
+        if container.duration is not None:
+            info["duration_sec"] = round(container.duration / 1_000_000, 2)
+        else:
+            info["duration_sec"] = None
+
+        for stream in container.streams:
+            if stream.type == "video":
+                cc = stream.codec_context
+                info["width"] = cc.width
+                info["height"] = cc.height
+                info["video_codec"] = cc.name
+                rate = stream.average_rate
+                info["fps"] = round(float(rate), 3) if rate else None
+                # 帧数是估算值：精确值只能靠全量解码得到，代价太高
+                if info.get("duration_sec") and info.get("fps"):
+                    info["estimated_frames"] = int(
+                        info["duration_sec"] * info["fps"])
+            elif stream.type == "audio":
+                cc = stream.codec_context
+                info["has_audio"] = True
+                info["audio_codec"] = cc.name
+                info["audio_sample_rate"] = cc.sample_rate
+                info["audio_channels"] = cc.channels
+
+        info.setdefault("has_audio", False)
+    return info
+
+
 def extract_audio(video_path, wav_path):
     """用 PyAV 解码 mp4 音频轨，重采样为 16kHz 单声道 WAV。"""
     import av
 
-    print("[1/3] 正在打开视频并提取音频...", flush=True)
+    print("正在打开视频并提取音频...", flush=True)
     container = av.open(video_path)
 
     # 找到音频流
@@ -89,111 +131,59 @@ def extract_audio(video_path, wav_path):
     return duration
 
 
-# ==================== 第二步：语音识别 ====================
-def transcribe(wav_path, model_size, output_dir):
-    """用 faster-whisper 转写，保留时间戳。"""
-    from faster_whisper import WhisperModel
-
-    print(f"[2/3] 正在加载模型: {model_size} ...", flush=True)
-    t0 = time.time()
-    # device="cpu", compute_type="int8" —— CPU 上最稳的组合
-    model = WhisperModel(model_size, device="cpu", compute_type="int8")
-    print(f"  模型加载完成，耗时 {time.time()-t0:.1f} 秒", flush=True)
-
-    print("[3/3] 正在转写（首次会下载模型，请耐心等待）...", flush=True)
-    t0 = time.time()
-    segments, info = model.transcribe(
-        wav_path,
-        language="zh",           # 强制中文，避免误判
-        task="transcribe",       # 不是翻译
-        beam_size=5,             # beam search，提高准确率
-        vad_filter=True,         # 语音活动检测，跳过静音段
-        vad_parameters=dict(
-            min_silence_duration_ms=500,
-            speech_pad_ms=200,
-        ),
-        condition_on_previous_text=False,  # 减少重复幻觉
-    )
-
-    print(f"  语言: {info.language} 概率 {info.language_probability:.2f}", flush=True)
-    print(f"  音频时长: {info.duration:.1f} 秒", flush=True)
-
-    result = {
-        "language": info.language,
-        "language_probability": info.language_probability,
-        "duration": info.duration,
-        "model_size": model_size,
-        "segments": [],
-    }
-
-    # 实时写出，便于中途查看进度
-    json_path = os.path.join(output_dir, "transcript.json")
-    txt_path = os.path.join(output_dir, "transcript.txt")
-    txt_lines = []
-    seg_count = 0
-
-    for seg in segments:
-        seg_data = {
-            "id": seg.id,
-            "start": round(seg.start, 2),
-            "end": round(seg.end, 2),
-            "text": seg.text.strip(),
-            "no_speech_prob": round(seg.no_speech_prob, 3) if seg.no_speech_prob else None,
-            "avg_logprob": round(seg.avg_logprob, 3) if seg.avg_logprob else None,
-        }
-        result["segments"].append(seg_data)
-
-        # 时间戳格式：[mm:ss] 文本
-        m, s = divmod(int(seg.start), 60)
-        line = f"[{m:02d}:{s:02d}] {seg.text.strip()}"
-        txt_lines.append(line)
-
-        seg_count += 1
-        if seg_count % 30 == 0:
-            elapsed = time.time() - t0
-            progress = seg.end / info.duration * 100
-            print(f"  已转写 {progress:.0f}% ({seg.end:.0f}s/{info.duration:.0f}s) "
-                  f"用时 {elapsed:.0f}s", flush=True)
-            # 增量保存，防止意外中断丢数据
-            with open(json_path, "w", encoding="utf-8") as f:
-                json.dump(result, f, ensure_ascii=False, indent=2)
-            with open(txt_path, "w", encoding="utf-8") as f:
-                f.write("\n".join(txt_lines))
-
-    # 最终保存
-    with open(json_path, "w", encoding="utf-8") as f:
-        json.dump(result, f, ensure_ascii=False, indent=2)
-    with open(txt_path, "w", encoding="utf-8") as f:
-        f.write("\n".join(txt_lines))
-
-    print(f"  转写完成: {seg_count} 个片段，耗时 {time.time()-t0:.0f} 秒", flush=True)
-    print(f"  输出: {json_path}", flush=True)
-    print(f"  输出: {txt_path}", flush=True)
-    return result
-
-
 def main():
+    ap = argparse.ArgumentParser(description="视频探测 + 16kHz 音频提取")
+    ap.add_argument("--video", required=True, help="视频文件路径")
+    ap.add_argument("--out-dir", default="output")
+    ap.add_argument("--skip-audio", action="store_true",
+                    help="只探测，不提取音频")
+    ap.add_argument("--preset", default=None,
+                    help="可选：品类预设名，仅用于覆盖输出文件名")
+    args = ap.parse_args()
+
+    if not os.path.exists(args.video):
+        print(f"错误：视频不存在: {args.video}", file=sys.stderr)
+        sys.exit(1)
+
+    cfg = (cfgmod.load_config(args.preset) if args.preset
+           else cfgmod.load_base())
+    out = cfg.get("output", {})
+
     print("=" * 60, flush=True)
-    print("视频音频转写工具", flush=True)
+    print("视频探测", flush=True)
     print("=" * 60, flush=True)
-    print(f"视频: {VIDEO_PATH}", flush=True)
-    print(f"模型: {MODEL_SIZE}", flush=True)
+    print(f"视频: {args.video}", flush=True)
+
+    os.makedirs(args.out_dir, exist_ok=True)
+
+    info = probe_video(args.video)
+    print(f"  分辨率: {info.get('width')}x{info.get('height')}", flush=True)
+    print(f"  时长: {info.get('duration_sec')}s  帧率: {info.get('fps')} fps",
+          flush=True)
+    print(f"  视频编码: {info.get('video_codec')}", flush=True)
+    print(f"  音频轨: {'有' if info.get('has_audio') else '无'} "
+          f"{info.get('audio_codec') or ''}", flush=True)
+
+    info_path = os.path.join(
+        args.out_dir, out.get("video_info_json", "video_info.json"))
+    with open(info_path, "w", encoding="utf-8") as f:
+        json.dump(info, f, ensure_ascii=False, indent=2)
+    print(f"  视频信息: {info_path}", flush=True)
+
+    if args.skip_audio:
+        print("已跳过音频提取（--skip-audio）", flush=True)
+        return
+
+    if not info.get("has_audio"):
+        print("视频没有音频轨，跳过音频提取", flush=True)
+        return
+
+    wav_path = os.path.join(args.out_dir, out.get("audio_wav", "audio_16k.wav"))
     print(flush=True)
-
-    wav_path = os.path.join(OUTPUT_DIR, "audio_16k.wav")
-
     if os.path.exists(wav_path) and os.path.getsize(wav_path) > 1000:
         print("检测到已有音频文件，跳过提取步骤", flush=True)
     else:
-        extract_audio(VIDEO_PATH, wav_path)
-
-    print(flush=True)
-    transcribe(wav_path, MODEL_SIZE, OUTPUT_DIR)
-
-    print(flush=True)
-    print("=" * 60, flush=True)
-    print("全部完成", flush=True)
-    print("=" * 60, flush=True)
+        extract_audio(args.video, wav_path)
 
 
 if __name__ == "__main__":

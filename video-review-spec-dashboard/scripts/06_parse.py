@@ -361,6 +361,8 @@ def apply_overrides(models, overrides):
 
 def merge_cards(cards, cfg):
     """把同一机型的多个帧合并成一条记录，冲突不静默覆盖。"""
+    # 冲突一律记录并保留现值，交人工处理；置为 false 则只保留现值不记冲突
+    keep_conflicts = cfg.get("parse", {}).get("keep_conflicts", True)
     groups = defaultdict(list)
     for c in cards:
         groups[(c["brand"], c["model"])].append(c)
@@ -387,12 +389,13 @@ def merge_cards(cards, cfg):
                                      "frame_count": 1}
                 else:
                     if merged[field]["value"] != val["value"]:
-                        conflicts.append({
-                            "field": field,
-                            "old": merged[field]["value"],
-                            "new": val["value"],
-                            "old_ts": merged[field]["source_timestamp"],
-                            "new_ts": it["timestamp"]})
+                        if keep_conflicts:
+                            conflicts.append({
+                                "field": field,
+                                "old": merged[field]["value"],
+                                "new": val["value"],
+                                "old_ts": merged[field]["source_timestamp"],
+                                "new_ts": it["timestamp"]})
                     else:
                         merged[field]["frame_count"] += 1
 

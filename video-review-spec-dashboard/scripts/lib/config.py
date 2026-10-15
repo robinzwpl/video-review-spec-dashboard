@@ -55,6 +55,16 @@ def validate(cfg):
     return cfg
 
 
+def load_base():
+    """
+    只加载通用层 config/default.yaml，不做 fields 校验。
+
+    供与品类无关的脚本（抽帧、OCR、版式探查）使用：
+    它们只需要通用阈值，此时可能还没有品类预设，不能强制要求 fields。
+    """
+    return load_yaml(os.path.join(config_dir(), "default.yaml"))
+
+
 def load_config(preset_name):
     """
     加载配置。

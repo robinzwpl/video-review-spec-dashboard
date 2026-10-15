@@ -47,11 +47,73 @@ render:
 
 # ------------------------------------------------------------
 # 输出文件名（各阶段产物）
+# 消费者：pipeline 用这些名字拼默认路径；各脚本读同名键保持读写一致
 # ------------------------------------------------------------
 output:
+  # 视频探测结果（01 写）
+  video_info_json: "video_info.json"
+  # 16kHz 音频（01 写、02 读）
+  audio_wav: "audio_16k.wav"
+  # 转写结果（02 写、10 读）
+  transcript_json: "transcript.json"
+  transcript_txt: "transcript.txt"
+  # 关键帧子目录名（03 写、04/07 读）
+  frames_dir: "frames"
   keyframes_json: "keyframes.json"
   frames_ocr_json: "frames_ocr.json"
   models_json: "models.json"
+  # 核对拼图的前缀，实际文件名是 <前缀>_<序号>_<品牌>.jpg
+  contact_sheet_prefix: "contact_sheet"
   specs_csv: "specs.csv"
   specs_table_html: "specs_table.html"
   dashboard_html: "dashboard.html"
+  # 章节定位（10 写，当前无下游消费，供人工定位用）
+  chapters_json: "chapters.json"
+
+# ------------------------------------------------------------
+# 视频查找（pipeline 用）
+# 优先级：--video 显式给出 > 环境变量 VRSD_VIDEO > 本段配置 > 项目目录内递归
+# ------------------------------------------------------------
+search:
+  # 额外的视频搜索目录。默认为空：不猜测任何用户专属目录（如 Downloads）
+  video_dirs: []
+  video_exts: ["mp4", "mkv", "mov"]
+
+# ------------------------------------------------------------
+# 抽帧参数（03 阶段，与品类无关）
+# ------------------------------------------------------------
+keyframes:
+  # 每隔多少秒检查一次画面（越小越密，抽帧越慢）
+  interval: 1.0
+  # 帧间平均像素差低于此值则视为「画面没变」，跳过该帧
+  # 实测：1929s 视频共 57868 帧，按此阈值只保留 226 帧（压缩比 256:1）
+  diff_threshold: 12.0
+  # 差异计算前的灰度降采样倍率（8 = 每 8 行/列取一个像素）
+  downsample: 8
+  # JPEG 保存质量
+  jpeg_quality: 88
+
+# ------------------------------------------------------------
+# 章节定位（10 阶段，可选）
+# 词表是测评视频的通用话术，品类有专属说法时在 preset 里覆盖
+# 顺序敏感：每个片段/文本框只取第一个命中的词表项
+# ------------------------------------------------------------
+chapters:
+  # 音频线索与已有画面线索相距在此秒数内，视为重复，丢弃音频线索
+  audio_dedupe_sec: 3
+  # 两个章节起点的最小间隔（秒），更近的合并
+  min_gap_sec: 20
+  # 音频线索的兜底置信度（画面线索带真实 OCR 置信度，更可靠）
+  fallback_score: 0.5
+  # 章节名截断长度
+  name_max_len: 30
+  audio_patterns:
+    - {pattern: '第\s*([一二三四五六七八九十\d])\s*档', kind: "档位序号"}
+    - {pattern: '(\d{3,5})\s*(?:块钱|块|元)?\s*(?:档|这一档)', kind: "档位价格"}
+    - {pattern: '(\d{3,5})\s*到\s*(\d{3,5})', kind: "价格区间"}
+    - {pattern: '(\d{3,5})\s*档', kind: "档位价格"}
+    - {pattern: '小结|总结|收尾|总结一下', kind: "段落标记"}
+  visual_patterns:
+    - {pattern: '第[一二三四五六七八九十]\s*档', kind: "档位卡"}
+    - {pattern: '\d{3,5}\s*元档', kind: "档位卡"}
+    - {pattern: '\d{3,5}\s*[-—~至到]\s*\d{3,5}\s*元', kind: "价格区间"}
