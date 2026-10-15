@@ -1,0 +1,400 @@
+# ============================================================
+# 预设：75 寸电视横评（作者「科技绝对值」，2026-09-23 发布）
+# 品类：电视 —— 换其他品类时，复制 config/presets/_template.yaml 重新填写
+# 本文件同时作为回归测试的领域配置，改动会导致 tests/ 下的基线比对失败
+# ============================================================
+
+meta:
+  name: tv75_science
+  title: "75寸电视分价位性能指标看板"
+  author: "科技绝对值"
+  source_date: "2026-09-23"
+  aweme_id: "7688759527650381107"
+  note: "32 台 75 寸电视横评，价格区间 2821.9 - 10649.1 元"
+
+# ------------------------------------------------------------
+# 干扰帧排除（铁律 M5）
+# 开篇 15.8-18.3s 是「32款一起拆开看」总览页，多机型卡片同屏，
+# 文本框混杂必然导致机型与参数错配，因此整体丢弃该时间点之前的帧
+# ------------------------------------------------------------
+exclude_before_sec: 120.0
+
+# ------------------------------------------------------------
+# OCR 文本修正表（先做字面替换，再做正则替换）
+# ------------------------------------------------------------
+ocr_fixes:
+  literal:
+    - {from: "HDM12.1", to: "HDMI2.1"}
+    - {from: "HDM12.0", to: "HDMI2.0"}
+    - {from: "HDM1 2.1", to: "HDMI2.1"}
+    - {from: "HDMI 2.1", to: "HDMI2.1"}
+    - {from: "HDMI 2.0", to: "HDMI2.0"}
+    - {from: "，", to: ","}
+    - {from: "：", to: ":"}
+  regex:
+    - {pattern: '4K\s*(\d+)\s*Hz', repl: '4K\1Hz', ignore_case: true}
+    - {pattern: '(\d+)\s*赫兹', repl: '\1Hz', ignore_case: false}
+    - {pattern: '\bnits?\b', repl: 'nits', ignore_case: true}
+    - {pattern: '\bSRGB\b', repl: 'sRGB', ignore_case: false}
+
+# ------------------------------------------------------------
+# 身份识别：品牌 + 型号
+# brand_map 可留空，留空时不做品牌识别、整行标题作为型号
+# ------------------------------------------------------------
+identity:
+  brand_map:
+    雷鸟: "雷鸟|Falcon"
+    创维: "创维|Skyworth"
+    海信: "海信|Hisense"
+    华为: "华为|HUAWEI"
+    小米: "小米|Xiaomi"
+    红米: "红米|Redmi|REDMI"
+    TCL: "TCL"
+    vidda: "vidda|VIDDA|Vidda"
+  # 标题行剔除词（栏目字样或总数说明，不是型号）
+  title_noise:
+    - "绝对值"
+    - "32款"
+    - "32台"
+    - "一起拆开看"
+    - "参考价"
+    - "售价"
+    - "热卖"
+    - "推荐"
+    - "参数"
+    - "全屏"
+    - "画质"
+    - "高刷"
+    - "新品"
+    - "汇总"
+    - "对比"
+    - "横评"
+    - "乾貝"
+  # 型号负向词表：命中则该候选不是型号（避免把 "P3" 当成型号）
+  model_negative: "DCI|P3|BT|2020|709|sRGB|SRGB|HDR|Dolby|ATMOS|绝对值|参考价"
+  # 去掉品牌前缀后，型号里可能残留的栏目字样（如「绝对值」）
+  strip_prefix: ["绝对值"]
+  # 从型号中剔除的年份（如 "鹏6 SE 2026" 去掉 2026）
+  strip_year: true
+  # 型号中遇到这些词即截断（其后为价格等无关内容）
+  cut_at: "参考价|￥|¥"
+
+# ------------------------------------------------------------
+# 字段定义
+#   name    内部字段名（下游展示与统计以此为准）
+#   label   展示用中文名
+#   type    值解析类型，决定 lib/schema.py 用哪个 handler
+#   aliases 画面上可能出现的标签原文（顺序敏感：精确匹配优先，靠前的先判定）
+# ------------------------------------------------------------
+fields:
+  - name: 价格
+    label: "参考价(元)"
+    type: money
+    unit: "元"
+    aliases: ["参考价", "价格", "售价", "到手价"]
+    note: "参考价为国补后价格，需符合地区补贴条件"
+
+  - name: 屏幕
+    label: "屏幕类型"
+    type: enum_map
+    unit: ""
+    aliases: ["屏幕", "面板", "屏体", "软屏", "硬屏"]
+    patterns:
+      - {pattern: "QD-?Mini\\s*LED", name: "QD-Mini LED"}
+      - {pattern: "SQD-?Mini\\s*LED", name: "SQD-Mini LED"}
+      - {pattern: "Mini\\s*LED", name: "Mini LED"}
+      - {pattern: "Micro\\s*LED", name: "Micro LED"}
+      - {pattern: "QD-?OLED", name: "QD-OLED"}
+      - {pattern: "OLED", name: "OLED"}
+      - {pattern: "ULED", name: "ULED"}
+      - {pattern: "QLED", name: "QLED"}
+      - {pattern: "VA\\s*软屏", name: "VA软屏"}
+      - {pattern: "极黑广角类纸屏", name: "极黑类纸屏"}
+      - {pattern: "墨晶屏[\\d.]*", name: "墨晶屏"}
+      - {pattern: "黑曜屏[\\w\\s]*", name: "黑曜屏"}
+      - {pattern: "直下式\\s*/?\\s*DLED", name: "直下式DLED"}
+      - {pattern: "直下式", name: "直下式"}
+      - {pattern: "DLED", name: "DLED"}
+      - {pattern: "IPS", name: "IPS"}
+      - {pattern: "\\bVA\\b", name: "VA"}
+      - {pattern: "ADS", name: "ADS"}
+      - {pattern: "硬屏", name: "硬屏"}
+
+  - name: 屏幕尺寸
+    label: "尺寸(英寸)"
+    type: size_inch
+    unit: "英寸"
+    aliases: ["尺寸", "英寸", "屏幕尺寸"]
+
+  - name: 分区数
+    label: "背光分区"
+    type: zones
+    unit: "区"
+    aliases: ["背光分区", "分区"]
+    no_zone_pattern: "无独立背光分区|无光分区|无分区"
+    zone_types: ["万象分区", "超级分区", "独立背光分区", "背光分区"]
+    notes:
+      none: "无独立背光分区（侧光/直下式无控光分区），记为0"
+      exact: "分区类型：{zone_type}；需确认单/双/多重分区，算法不同不可直接比较"
+      range: "卡片标注 {lo}-{hi} 级分区区间，取上限；非精确分区数"
+
+  - name: 控色区
+    label: "玲珑控色区"
+    type: zones_named
+    unit: "个控色区"
+    aliases: ["玲珑控色区", "控色区", "品牌控色区", "控色"]
+    note: "玲珑控色区（海信专属口径），与背光分区算法不同，不可与背光分区直接比较"
+
+  - name: 峰值亮度
+    label: "峰值亮度(nit)"
+    type: range_num
+    unit: "nit"
+    aliases: ["亮度范围", "亮度", "峰值亮度"]
+    notes:
+      range: "标称区间 {lo}-{hi} nit，取上限；注意测试窗口口径"
+      single: "需注意测试窗口口径（3%/10%窗口 vs 全屏）"
+
+  - name: 典型亮度
+    label: "典型亮度(nit)"
+    type: range_num
+    unit: "nit"
+    aliases: ["典型亮度"]
+    notes:
+      range: "标称区间 {lo}-{hi} nit，取上限；注意测试窗口口径"
+      single: "需注意测试窗口口径（3%/10%窗口 vs 全屏）"
+
+  - name: 刷新率
+    label: "原生刷新(Hz)"
+    type: refresh_hz
+    unit: "Hz"
+    aliases: ["原生刷新", "刷新率", "刷新"]
+    notes:
+      native: "原生 4K 刷新率"
+      non_native: "卡片未标4K，可能为 2K/降分辨率模式下的高刷"
+    # 倍频值单独成字段，不与原生刷新率混算
+    boost_field: "刷新率_倍频"
+    boost_pattern: '(\d{2,3})\s*Hz\s*[（(]?\s*倍频'
+    boost_note: "倍频值，非原生刷新率，不可与原生值直接比较"
+
+  - name: 色域
+    label: "色域"
+    type: percent_std
+    unit: ""
+    aliases: ["色域", "色彩覆盖"]
+    standards:
+      - {pattern: '(\d{2,3}(?:\.\d)?)\s*%\s*DCI-?P3', name: "% DCI-P3"}
+      - {pattern: '(\d{2,3}(?:\.\d)?)\s*%\s*BT\.?2020', name: "% BT.2020"}
+      - {pattern: '(\d{2,3}(?:\.\d)?)\s*%\s*BT\.?709', name: "% BT.709"}
+      - {pattern: '(\d{2,3}(?:\.\d)?)\s*%\s*sRGB', name: "% sRGB"}
+    notes:
+      over100: "画面标注为 {val}%，超过 100% 覆盖率上限，技术上不成立（原图如此，非识别误差），需人工核对"
+      srgb: "色域标准为 sRGB，与 DCI-P3/BT.2020 非同一量纲，不可直接比较"
+      default: "色域标准 {std}，与其他标准不可直接比较"
+
+  - name: 内存
+    label: "内存(GB)"
+    type: capacity_gb
+    unit: "GB"
+    aliases: ["运行内存", "内存"]
+
+  - name: 存储
+    label: "存储(GB)"
+    type: capacity_gb
+    unit: "GB"
+    aliases: ["存储", "硬盘", "ROM"]
+
+  - name: 处理器
+    label: "处理器"
+    type: cpu_text
+    unit: ""
+    aliases: ["处理器", "芯片", "cpu", "CPU"]
+
+  - name: HDMI
+    label: "HDMI"
+    type: count_by_version
+    unit: "个"
+    aliases: ["hdm", "接口"]
+    versions: ["2.1", "2.0"]
+
+  - name: 发声单元
+    label: "发声单元(个)"
+    type: int_unit
+    unit: "个"
+    aliases: ["发声单元", "扬声器"]
+
+  - name: 声道
+    label: "声道"
+    type: text_short
+    unit: ""
+    aliases: ["声道"]
+
+  - name: 音频
+    label: "音频"
+    type: text_short
+    unit: ""
+    aliases: ["音响"]
+
+  - name: 游戏特性
+    label: "游戏特性"
+    type: text_short
+    unit: ""
+    aliases: ["游戏", "gam"]
+
+  - name: HDR
+    label: "HDR"
+    type: text_short
+    unit: ""
+    aliases: ["hdr"]
+
+  - name: 认证
+    label: "认证"
+    type: text_short
+    unit: ""
+    aliases: ["认证"]
+
+  - name: 画质技术
+    label: "画质技术"
+    type: text_short
+    unit: ""
+    aliases: ["画质", "技术"]
+
+# ------------------------------------------------------------
+# 无标签字段的兜底提取
+# 实测底部横排版式中「运行内存/存储」的标签可能没被 OCR 出来，
+# 只剩值（形如 "2GB / 64GB"），导致该字段整体缺失，故做全帧兜底
+# ------------------------------------------------------------
+fallback_extract:
+  - {field: "内存", pattern: '(\d+)\s*GB\s*[/／]\s*(\d+)\s*GB', group: 1, type: capacity_gb, unit: "GB", note: "由 'NGB/MGB' 复合值拆分"}
+  - {field: "存储", pattern: '(\d+)\s*GB\s*[/／]\s*(\d+)\s*GB', group: 2, type: capacity_gb, unit: "GB", note: "由 'NGB/MGB' 复合值拆分"}
+  - {field: "HDMI2.1数量", pattern: 'HDMI\s*2\.1\D{0,8}?(\d+)\s*个?', group: 1, type: int_unit, unit: "个", hdmi_ver: "2.1"}
+  - {field: "HDMI2.0数量", pattern: 'HDMI\s*2\.0\D{0,8}?(\d+)\s*个?', group: 1, type: int_unit, unit: "个", hdmi_ver: "2.0"}
+  - {field: "发声单元", pattern: '发声单元\D{0,20}?(\d+)\s*个', group: 1, type: int_unit, unit: "个"}
+  - {field: "处理器", pattern: '处理器\D{0,20}?((?:双核|单核|四核|五核|八核)\s*[A-Z]?\d{0,3}(?:\s*\+\s*(?:双核|单核|四核|五核|八核)?\s*[A-Z]?\d{0,3})*)', group: 1, type: text_short}
+  - {field: "屏幕尺寸", pattern: '(\d{2})\s*(?:英寸|寸)', group: 1, type: size_inch, unit: "英寸"}
+
+# ------------------------------------------------------------
+# 底部横排栏区域映射（按 OCR 阶段标注的 region 归位）
+# 必须按实测 x 边界切分，等分切分无效 —— 实测内存覆盖率因此从 2/32 提升到 31/32
+#   footer_v1 x150-560   -> 运行内存/存储
+#   footer_v2 x620-900   -> HDMI 2.1 / 2.0
+#   footer_v3 x960-1180  -> 发声单元
+#   footer_v4 x1340-1800 -> 处理器
+# ------------------------------------------------------------
+# 每个区域用 extractors 描述「怎么从这段文本里取值」：
+#   field    目标字段名
+#   type     值类型（同 fields 中的 type）
+#   pattern  取值正则（第一个捕获组为值）
+#   ordinal  取第几个匹配（0=第一个）—— 用于「2GB / 64GB」这类同形态复合值
+footer_regions:
+  footer_v1:
+    fields: ["内存", "存储"]
+    extractors:
+      - {field: "内存", type: capacity_gb, unit: "GB", pattern: '(\d+)\s*GB', ordinal: 0, note: "由底部横排栏 'NGB/MGB' 复合值拆分"}
+      - {field: "存储", type: capacity_gb, unit: "GB", pattern: '(\d+)\s*GB', ordinal: 1}
+  footer_v2:
+    fields: ["HDMI2.1数量", "HDMI2.0数量"]
+    extractors:
+      - {field: "HDMI2.1数量", type: int_unit, unit: "个", pattern: '2\.?1\D{0,6}?(\d+)\s*个?', ordinal: 0}
+      - {field: "HDMI2.0数量", type: int_unit, unit: "个", pattern: '2\.?0\D{0,6}?(\d+)\s*个?', ordinal: 0}
+  footer_v3:
+    fields: ["发声单元"]
+    extractors:
+      - {field: "发声单元", type: int_unit, unit: "个", pattern: '(\d+)\s*个', ordinal: 0}
+  footer_v4:
+    fields: ["处理器"]
+    extractors:
+      - {field: "处理器", type: cpu_text, unit: "", pattern: '((?:双核|单核|四核|五核|八核)\s*[A-Z]?\d{0,3}(?:\s*\+\s*(?:双核|单核|四核|五核|八核)?\s*[A-Z]?\d{0,3})*)', ordinal: 0}
+
+# ------------------------------------------------------------
+# 特殊技术特性（整帧文本匹配，命中则记入 specials）
+# ------------------------------------------------------------
+specials:
+  - {pattern: "玲珑控色区", name: "玲珑控色区", type: "画质技术", owner: "海信"}
+  - {pattern: "万象分区", name: "万象分区", type: "分区类型", owner: "TCL/雷鸟"}
+  - {pattern: "超级分区", name: "超级分区", type: "分区类型", owner: "创维"}
+  - {pattern: "变色龙AI画质芯片", name: "变色龙AI画质芯片", type: "画质芯片", owner: "创维"}
+  - {pattern: "QD-?Mini\\s*LED", name: "QD-Mini LED", type: "屏幕技术", owner: "通用"}
+  - {pattern: "SQD-?Mini\\s*LED", name: "SQD-Mini LED", type: "屏幕技术", owner: "TCL"}
+  - {pattern: "Mini\\s*LED", name: "Mini LED", type: "背光技术", owner: "通用"}
+  - {pattern: "墨晶屏", name: "墨晶屏", type: "屏幕技术", owner: "海信"}
+  - {pattern: "极黑广角类纸屏|类纸屏", name: "极黑类纸屏", type: "屏幕技术", owner: "创维"}
+  - {pattern: "黑曜屏", name: "黑曜屏", type: "屏幕技术", owner: "vidda"}
+  - {pattern: "晶粹高色阻屏|高色阻屏", name: "高色阻屏", type: "屏幕技术", owner: "TCL"}
+  - {pattern: "直下式\\s*/?\\s*DLED|直下式|DLED", name: "直下式DLED", type: "背光技术", owner: "通用"}
+  - {pattern: "VA\\s*软屏", name: "VA软屏", type: "屏幕类型", owner: "通用"}
+  - {pattern: "ADS|硬屏", name: "硬屏", type: "屏幕类型", owner: "通用"}
+  - {pattern: "量子点|超级量子点", name: "量子点", type: "屏幕技术", owner: "通用"}
+
+# ------------------------------------------------------------
+# 人工核对确认值（对照 contact sheet 截图逐项确认后回填）
+# 命中方式：机型全名包含 key，或 key 包含机型全名
+# ------------------------------------------------------------
+overrides:
+  "创维A4F Pro":
+    色域: {value: 100.0, unit: "% sRGB", standard: "% sRGB", note: "色域标准为 sRGB，与 DCI-P3/BT.2020 非同一量纲，不可直接比较"}
+    内存: {value: 2, unit: "GB"}
+    存储: {value: 64, unit: "GB"}
+    处理器: {value: "四核A55", unit: ""}
+    "HDMI2.1数量": {value: 2, unit: "个"}
+    发声单元: {value: 2, unit: "个"}
+  "华为Vision智慧屏6":
+    屏幕: {value: "VA软屏", unit: ""}
+    内存: {value: 8, unit: "GB"}
+    存储: {value: 64, unit: "GB"}
+    处理器: {value: "四核A73", unit: ""}
+    "刷新率_倍频": {value: 288, unit: "Hz", note: "倍频值，非原生刷新率，不可与原生值直接比较"}
+
+# ------------------------------------------------------------
+# 口径备注提取（命中则记入 notes，用于显式化口径陷阱，铁律 M9）
+# ------------------------------------------------------------
+note_rules:
+  - {field: "_口径说明", pattern: "^客服[:：]", mode: match}
+  - {field: "_刷新说明", pattern: "\\d{2,3}Hz", mode: search, require: "高刷"}
+  - {field: "_宣称标记", pattern: "[（(]\\s*宣称\\s*[)）]", mode: search, fixed_text: "该数值为厂商宣称值而非实测值"}
+  - {field: "_价格口径", pattern: "国补|补贴|地区", mode: search}
+
+# ------------------------------------------------------------
+# 下游展示：核对表
+# ------------------------------------------------------------
+table:
+  # 展示顺序（用 fields 中定义的 name）
+  field_order:
+    ["价格", "屏幕", "屏幕尺寸", "分区数", "控色区", "峰值亮度", "刷新率",
+     "刷新率_倍频", "色域", "内存", "存储", "处理器",
+     "HDMI2.1数量", "HDMI2.0数量", "发声单元"]
+  # 附加列（非参数字段，由脚本按名生成）
+  extra_columns:
+    ["序号", "品牌", "型号", "档位", "分区类型", "亮度为区间",
+     "特殊技术特性", "口径备注", "来源时间戳", "数据来源"]
+
+# ------------------------------------------------------------
+# 下游展示：看板
+# 档位依据视频实际章节卡与实际价格分布划分，不是预设值（铁律 M12）
+# ------------------------------------------------------------
+dashboard:
+  price_field: "价格"
+  tiers:
+    - {lo: 0, hi: 3500, name: "3000元档", desc: "第一档：能看和看着难受的分界线"}
+    - {lo: 3500, hi: 4500, name: "3500-4500元", desc: "第二档：独立分区 + 原生高刷"}
+    - {lo: 4500, hi: 6000, name: "4500-6000元", desc: "第三档：均衡之选"}
+    - {lo: 6000, hi: 8000, name: "6000-8000元", desc: "第四档：中高端"}
+    - {lo: 8000, hi: 11000, name: "8000-11000元", desc: "第五档：8000 元以上"}
+    - {lo: 11000, hi: 1000000000, name: "11000元以上", desc: "万元附近旗舰"}
+  # 热力图与柱状图使用的核心指标
+  metrics:
+    - {field: "峰值亮度", key: "bright", label: "峰值亮度(nit)"}
+    - {field: "分区数", key: "zones", label: "背光分区"}
+    - {field: "刷新率", key: "refresh", label: "原生刷新(Hz)"}
+  # 色域按标准分组展示，不同标准不可混算
+  color_std_groups:
+    - {unit: "% DCI-P3", name: "DCI-P3"}
+    - {unit: "% BT.2020", name: "BT.2020"}
+    - {unit: "% sRGB", name: "sRGB"}
+    - {unit: "% BT.709", name: "BT.709"}
+  # 看板顶部统一口径说明
+  caveats:
+    - "色域分 sRGB / DCI-P3 / BT.2020 / BT.709 四种标准，量纲不同，不可直接比较"
+    - "刷新率区分原生 4K 与倍频、以及 2K 模式下的高刷，不可混算"
+    - "峰值亮度需注明测试窗口口径（3% / 10% 窗口 vs 全屏）"
+    - "背光分区存在单区 / 双区 / 多重分区算法差异，数量不可直接比较"
+    - "参考价为国补后价格，需符合地区补贴条件"
