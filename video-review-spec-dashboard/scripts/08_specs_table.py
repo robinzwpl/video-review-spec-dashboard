@@ -1,86 +1,99 @@
 # -*- coding: utf-8 -*-
 """
-生成全字段核对表（CSV + HTML），供用户一次性核对 32 台机型。
+生成全字段核对表（CSV + HTML），供人工逐项核对。
 
-相比 contact sheet（分批看图），本表把所有字段平铺成表格，
-便于横向对比与逐项检查。
+相比 contact sheet（分批看图），本表把所有字段平铺成表格，便于横向对比与逐项检查。
+
+列顺序、字段中文名、档位划分、口径说明全部取自 preset 配置，
+换品类不需要改本文件。
+
+铁律 M8：缺失一律显示「未提取」，不填 0、不推测填充。
 """
 import os
-import re
 import sys
-import json
 import csv
+import json
+import argparse
+
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+
+from lib import config as cfgmod
+
+MISSING = "未提取"
 
 
-# 字段展示顺序与中文名
-FIELD_ORDER = [
-    ("价格", "参考价(元)"),
-    ("屏幕", "屏幕类型"),
-    ("屏幕尺寸", "尺寸(英寸)"),
-    ("分区数", "背光分区"),
-    ("控色区", "玲珑控色区"),
-    ("峰值亮度", "峰值亮度(nit)"),
-    ("刷新率", "原生刷新(Hz)"),
-    ("刷新率_倍频", "倍频(Hz)"),
-    ("色域", "色域"),
-    ("内存", "内存(GB)"),
-    ("存储", "存储(GB)"),
-    ("处理器", "处理器"),
-    ("HDMI2.1数量", "HDMI2.1(个)"),
-    ("HDMI2.0数量", "HDMI2.0(个)"),
-    ("发声单元", "发声单元(个)"),
-]
-
-COLUMNS = [
-    "序号", "品牌", "型号", "档位", "参考价(元)", "屏幕类型", "尺寸(英寸)",
-    "背光分区", "玲珑控色区", "分区类型", "峰值亮度(nit)", "亮度为区间", "原生刷新(Hz)",
-    "倍频(Hz)", "色域", "内存(GB)", "存储(GB)", "处理器",
-    "HDMI2.1(个)", "HDMI2.0(个)", "发声单元(个)",
-    "特殊技术特性", "口径备注", "来源时间戳", "数据来源",
-]
+def get_field_defs(cfg, field_order):
+    """按配置的展示顺序取字段定义。"""
+    by_name = {fd["name"]: fd for fd in cfg["fields"]}
+    defs = []
+    for name in field_order:
+        fd = by_name.get(name)
+        if fd is None:
+            # 兜底字段（如 HDMI2.1数量）不在 fields 里时，用字段名本身做标签
+            fd = {"name": name, "label": name, "type": "text_short"}
+        defs.append(fd)
+    return defs
 
 
-def classify_tier(price):
-    """
-    按视频实际章节卡与实际价格分布分档。
-    实测 32 台价格区间 2821.9 - 10649.1 元。
-    """
+def tier_of(price, cfg):
+    """按配置划分档位；未配置档位时返回 None（不做预设）。"""
     if price is None:
-        return "未查到"
-    if price < 3500:
-        return "3000元档"
-    if price < 4500:
-        return "3500-4500元"
-    if price < 6000:
-        return "4500-6000元"
-    if price < 8000:
-        return "6000-8000元"
-    if price < 11000:
-        return "8000-11000元"
-    return "11000元以上"
+        return None
+    for t in cfg.get("dashboard", {}).get("tiers", []):
+        if t["lo"] <= price < t["hi"]:
+            return t["name"]
+    return None
 
 
-def build_rows(models):
+def display_value(p, fd):
+    """把字段值转成表格里显示的字符串。"""
+    entry = p.get(fd["name"])
+    if not entry:
+        return MISSING
+    val = entry.get("value")
+    if val is None:
+        return MISSING
+
+    ftype = fd.get("type")
+    unit = entry.get("unit", "")
+
+    # 色域一类：识别异常时标「待核对」，不擅自改数值
+    if ftype == "percent_std" and entry.get("ocr_error"):
+        return f"待核对({val}{unit})"
+
+    if ftype in ("money", "int_unit", "capacity_gb", "size_inch",
+                 "zones", "zones_named", "refresh_hz", "count_by_version"):
+        return f"{val}{unit}" if unit else str(val)
+
+    if ftype == "range_num":
+        if entry.get("is_range"):
+            return f"{entry.get('value_min')}-{val}{unit}"
+        return f"{val}{unit}" if unit else str(val)
+
+    return str(val)
+
+
+def build_rows(models, cfg):
+    field_order = cfg.get("table", {}).get("field_order", [])
+    defs = get_field_defs(cfg, field_order)
+
     rows = []
     for idx, m in enumerate(sorted(models, key=lambda x: x.get("first_seen", 0)), 1):
         p = m.get("params", {})
+        price = p.get(cfg.get("dashboard", {}).get("price_field", "价格"), {}).get("value")
 
-        def gv(field):
-            return p.get(field, {}).get("value")
+        row = {
+            "序号": idx,
+            "品牌": m.get("brand") or "?",
+            "型号": m.get("model") or "?",
+            "档位": tier_of(price, cfg) or "-",
+        }
+        for fd in defs:
+            row[fd["label"]] = display_value(p, fd)
 
-        price = gv("价格")
-        zones = gv("分区数")
-        bright = gv("峰值亮度")
-        cg = p.get("色域", {})
-        cg_val = cg.get("value")
-        cg_std = cg.get("unit", "")
-        if cg.get("ocr_error"):
-            # 画面原文如此，技术上不成立但据实记录，标注待人工核对
-            cg_disp = f"待核对({cg_val}{cg_std})"
-        else:
-            cg_disp = f"{cg_val}{cg_std}" if cg_val is not None else "未提取"
-
+        # 特殊技术特性
         specials = "、".join(sorted({s["name"] for s in m.get("specials", [])}))
+        row["特殊技术特性"] = specials or "-"
 
         # 口径备注（去重）
         note_set = []
@@ -88,86 +101,85 @@ def build_rows(models):
             t = n.get("note_text", "").strip()
             if t and t not in note_set:
                 note_set.append(t)
-        # 分区非精确也要说明
-        if zones is not None and p.get("分区数", {}).get("exact") is False:
-            note_set.append("分区为档次区间，非精确值")
+        # 区间值要显式说明，避免被当成精确值
+        for fd in defs:
+            entry = p.get(fd["name"], {})
+            if entry.get("is_range"):
+                note_set.append(f"{fd['label']}为区间，取上限")
+            if entry.get("exact") is False:
+                note_set.append(f"{fd['label']}为档次区间，非精确值")
         if m.get("verified"):
-            note_set.append("部分字段经用户截图确认")
-        notes = " | ".join(note_set[:4])
+            note_set.append("部分字段经人工截图确认")
+        row["口径备注"] = " | ".join(note_set[:4]) or "-"
 
-        # 数据来源
+        # 数据来源汇总
         src = []
-        for field, v in p.items():
+        for v in p.values():
             s = v.get("source", "")
             if "兜底" in s:
                 src.append("兜底")
-            elif "用户" in s:
-                src.append("用户确认")
-        src_disp = "+".join(sorted(set(src))) if src else "OCR"
+            elif "用户" in s or "人工" in s:
+                src.append("人工确认")
+        row["数据来源"] = "+".join(sorted(set(src))) if src else "OCR"
+        row["来源时间戳"] = f"@{m.get('first_seen', 0):.0f}s"
 
-        rows.append({
-            "序号": idx,
-            "品牌": m.get("brand") or "?",
-            "型号": m.get("model") or "?",
-            "档位": classify_tier(price),
-            "参考价(元)": price if price is not None else "未提取",
-            "屏幕类型": gv("屏幕") or "未提取",
-            "尺寸(英寸)": gv("屏幕尺寸") or "未提取",
-            "背光分区": zones if zones is not None else "未提取",
-            "玲珑控色区": gv("控色区") if gv("控色区") is not None else "未提取",
-            "分区类型": p.get("分区数", {}).get("zone_type") or "-",
-            "峰值亮度(nit)": bright if bright is not None else "未提取",
-            "亮度为区间": "是" if p.get("峰值亮度", {}).get("is_range") else "",
-            "原生刷新(Hz)": gv("刷新率") if gv("刷新率") is not None else "未提取",
-            "倍频(Hz)": gv("刷新率_倍频") or "",
-            "色域": cg_disp,
-            "内存(GB)": gv("内存") if gv("内存") is not None else "未提取",
-            "存储(GB)": gv("存储") if gv("存储") is not None else "未提取",
-            "处理器": gv("处理器") or "未提取",
-            "HDMI2.1(个)": gv("HDMI2.1数量") or "未提取",
-            "HDMI2.0(个)": gv("HDMI2.0数量") or "未提取",
-            "发声单元(个)": gv("发声单元") or "未提取",
-            "特殊技术特性": specials or "-",
-            "口径备注": notes or "-",
-            "来源时间戳": f"@{m.get('first_seen', 0):.0f}s",
-            "数据来源": src_disp,
-        })
-    return rows
+        rows.append(row)
+    return rows, defs
 
 
-def write_csv(rows, path):
+def build_columns(defs, cfg):
+    """列顺序：附加列在前 + 字段列 + 附加列在后。"""
+    extra = cfg.get("table", {}).get("extra_columns", [])
+    head = [c for c in extra if c in ("序号", "品牌", "型号", "档位")]
+    tail = [c for c in extra if c not in head]
+    field_labels = [fd["label"] for fd in defs]
+    seen = set()
+    cols = []
+    for c in head + field_labels + tail:
+        if c not in seen:
+            cols.append(c)
+            seen.add(c)
+    return cols
+
+
+def coverage(rows, col):
+    return sum(1 for r in rows
+               if str(r.get(col, MISSING)) not in (MISSING, "未查到", "-", "", "None"))
+
+
+def write_csv(rows, cols, path):
     with open(path, "w", encoding="utf-8-sig", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=COLUMNS)
+        w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
         w.writeheader()
         w.writerows(rows)
 
 
-def write_html(rows, path, stats):
-    """生成便于横向扫视的 HTML 表格。"""
-    # 分组着色
-    tier_colors = {
-        "3000元以下": "#f0f9eb", "3000-4500": "#e6f4ff",
-        "4500-6000": "#fff7e6", "6000-8000": "#fff1f0",
-        "8000-12000": "#f9f0ff", "12000以上": "#fff0f6",
-        "未查到": "#f5f5f5",
-    }
+def write_html(rows, cols, defs, cfg, path, stats):
+    meta = cfg.get("meta", {})
+    title = meta.get("title", "参数核对表")
+    caveats = cfg.get("dashboard", {}).get("caveats", [])
+
+    numeric_labels = {fd["label"] for fd in defs
+                      if fd.get("type") in ("money", "int_unit", "capacity_gb",
+                                            "size_inch", "zones", "zones_named",
+                                            "refresh_hz", "count_by_version",
+                                            "range_num", "percent_std")}
 
     def cell_class(col, val):
         s = str(val)
-        if s in ("未提取", "未查到", "-", ""):
+        if s in (MISSING, "未查到", "-", ""):
             return "miss"
-        if s.startswith("待确认"):
+        if s.startswith("待核对"):
             return "warn"
-        if col in ("序号",):
-            return "num"
-        if col in ("参考价(元)", "峰值亮度(nit)", "原生刷新(Hz)", "内存(GB)",
-                   "存储(GB)", "背光分区", "HDMI2.1(个)", "发声单元(个)"):
+        if col in numeric_labels:
             return "num"
         return ""
 
+    notice = "".join(f"<br>{i+1}. {c}" for i, c in enumerate(caveats))
+
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN"><head><meta charset="UTF-8">
-<title>75寸电视横评 - 全字段核对表</title>
+<title>{title} - 全字段核对表</title>
 <style>
  *{{margin:0;padding:0;box-sizing:border-box}}
  body{{font-family:-apple-system,"Microsoft YaHei",sans-serif;background:#f5f6f8;
@@ -193,30 +205,26 @@ def write_html(rows, path, stats):
        background:#eef1f4;color:#4a5058}}
  .note{{color:#8f959e;font-size:11px;max-width:280px;white-space:normal;line-height:1.5}}
 </style></head><body>
-<h1>75 寸电视横评 · 全字段核对表</h1>
+<h1>{title} · 全字段核对表</h1>
 <div class="sub">
-共 {len(rows)} 台机型 · 数据源：科技绝对值《七大品牌 32 台 75 寸电视横评》（2026-09-23）<br>
-提取方式：视频关键帧 OCR（参数卡）+ 音频转写交叉验证 · 每行标注来源帧时间戳可回溯
+共 {len(rows)} 条 · 数据源：{meta.get('author', '')}（{meta.get('source_date', '')}）<br>
+{meta.get('note', '')}<br>
+提取方式：视频关键帧 OCR（参数卡）· 每行标注来源帧时间戳可回溯
 </div>
 <div class="stats">{''.join(f'<div class="stat"><div class="n">{v}</div><div class="l">{k}</div></div>' for k, v in stats)}</div>
 <div class="notice">
-<strong>口径说明：</strong>① 色域按标准分列（sRGB / DCI-P3 / BT.2020 / BT.709），不同标准数值不可直接比较；
-② 刷新率以原生 4K 口径为主，倍频/2K 模式单独记录；
-③ 亮度常为区间（如 4000-5000 nits），表中取上限并标注「亮度为区间」；
-④ 分区若为档次（如 100-200级）非精确值，已在「分区类型」列标明；
-⑤ 标注「未提取」表示视频参数卡上未给出该字段，不做推测填充。
+<strong>口径说明：</strong>{notice or '（本品类未配置口径说明）'}
+<br>{len(caveats) + 1}. 标注「未提取」表示画面未给出该字段，不做推测填充。
 </div>
 <div class="tw"><table>
-<tr>{''.join(f'<th>{c}</th>' for c in COLUMNS)}</tr>
+<tr>{''.join(f'<th>{c}</th>' for c in cols)}</tr>
 """
-
     for r in rows:
-        tcls = tier_colors.get(r["档位"], "#f5f5f5")
         tds = []
-        for c in COLUMNS:
-            v = r[c]
+        for c in cols:
+            v = r.get(c, MISSING)
             if c == "档位":
-                tds.append(f'<td><span class="tier" style="background:{tcls}">{v}</span></td>')
+                tds.append(f'<td><span class="tier">{v}</span></td>')
             elif c in ("口径备注", "特殊技术特性"):
                 tds.append(f'<td class="note">{v}</td>')
             else:
@@ -230,43 +238,39 @@ def write_html(rows, path, stats):
 
 
 def main():
-    out_dir = sys.argv[1] if len(sys.argv) > 1 else "output"
-    with open(os.path.join(out_dir, "tv_models.json"), encoding="utf-8") as f:
+    ap = argparse.ArgumentParser(description="生成全字段核对表")
+    ap.add_argument("--preset", required=True, help="品类预设名")
+    ap.add_argument("--input", required=True, help="models.json 路径")
+    ap.add_argument("--csv", required=True, help="输出 CSV 路径")
+    ap.add_argument("--html", required=True, help="输出 HTML 路径")
+    args = ap.parse_args()
+
+    cfg = cfgmod.load_config(args.preset)
+    with open(args.input, encoding="utf-8") as f:
         models = json.load(f)
 
-    rows = build_rows(models)
+    rows, defs = build_rows(models, cfg)
+    cols = build_columns(defs, cfg)
 
-    csv_path = os.path.join(out_dir, "tv_specs.csv")
-    write_csv(rows, csv_path)
-    print(f"输出: {csv_path}  ({len(rows)} 行)", flush=True)
+    os.makedirs(os.path.dirname(os.path.abspath(args.csv)), exist_ok=True)
+    write_csv(rows, cols, args.csv)
+    print(f"输出: {args.csv}  ({len(rows)} 行)", flush=True)
 
-    # 统计
-    def cov(col):
-        return sum(1 for r in rows if str(r[col]) not in
-                   ("未提取", "未查到", "-", "", "None"))
+    stats = [("条目总数", len(rows))]
+    for fd in defs:
+        stats.append((fd["label"], coverage(rows, fd["label"])))
+    stats.append(("带特殊技术",
+                  sum(1 for r in rows if r.get("特殊技术特性") != "-")))
 
-    stats = [
-        ("机型总数", len(rows)),
-        ("价格完整", cov("参考价(元)")),
-        ("亮度完整", cov("峰值亮度(nit)")),
-        ("分区完整", cov("背光分区")),
-        ("刷新率完整", cov("原生刷新(Hz)")),
-        ("色域完整", cov("色域")),
-        ("内存完整", cov("内存(GB)")),
-        ("处理器完整", cov("处理器")),
-        ("带特殊技术", sum(1 for r in rows if r["特殊技术特性"] != "-")),
-    ]
-
-    html_path = os.path.join(out_dir, "tv_specs_table.html")
-    write_html(rows, html_path, stats)
-    print(f"输出: {html_path}", flush=True)
+    write_html(rows, cols, defs, cfg, args.html, stats)
+    print(f"输出: {args.html}", flush=True)
 
     print(flush=True)
     print("=" * 76, flush=True)
     print("字段覆盖统计", flush=True)
     print("=" * 76, flush=True)
     for k, v in stats:
-        print(f"  {k:<12} {v:>3}/{len(rows)}", flush=True)
+        print(f"  {k:<16} {v:>3}/{len(rows)}", flush=True)
 
     # 列出仍需人工确认的项
     print(flush=True)
@@ -275,17 +279,11 @@ def main():
     print("=" * 76, flush=True)
     for r in rows:
         issues = []
-        if "待核对" in str(r["色域"]) or "超过 100%" in r["口径备注"]:
-            issues.append("色域超100%需核对")
-        # 缺分区：若该机改用玲珑控色区（海信口径），不算缺失
-        if r["背光分区"] == "未提取" and r["玲珑控色区"] == "未提取":
-            issues.append("画面未给分区")
-        if r["峰值亮度(nit)"] == "未提取":
-            issues.append("画面未给亮度")
-        if r["内存(GB)"] == "未提取":
-            issues.append("缺内存(字幕遮挡)")
-        if r["处理器"] == "未提取":
-            issues.append("缺处理器(字幕遮挡)")
+        for fd in defs:
+            if str(r.get(fd["label"])) == MISSING:
+                issues.append(f"缺{fd['label']}")
+            elif str(r.get(fd["label"], "")).startswith("待核对"):
+                issues.append(f"{fd['label']}异常需核对")
         if issues:
             print(f"  [{r['序号']:2d}] {r['品牌']} {r['型号']}: "
                   f"{'、'.join(issues)}", flush=True)
