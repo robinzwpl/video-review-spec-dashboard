@@ -35,3 +35,6 @@ __pycache__/
 .venv/
 venv/
 .pytest_cache/
+
+# 交付用 zip 包
+*.zip
