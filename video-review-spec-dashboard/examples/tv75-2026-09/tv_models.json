@@ -1,0 +1,4180 @@
+[
+  {
+    "brand": "雷鸟",
+    "model": "鹏6 SE",
+    "params": {
+      "价格": {
+        "value": 2821.9,
+        "unit": "元",
+        "raw": "￥2,821.90",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 197.17,
+        "frame_path": "frames\\f0197.17.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "直下式DLED",
+        "unit": "",
+        "raw": "直下式/DLED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 197.17,
+        "frame_path": "frames\\f0197.17.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 0,
+        "unit": "区",
+        "raw": "无独立背光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "无分区",
+        "note": "无独立背光分区（侧光/直下式无控光分区），记为0",
+        "label_text": "背光分区",
+        "source_timestamp": 197.17,
+        "frame_path": "frames\\f0197.17.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 400,
+        "value_min": 300,
+        "unit": "nit",
+        "raw": "300-400 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 300-400 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 197.17,
+        "frame_path": "frames\\f0197.17.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 60,
+        "unit": "Hz",
+        "raw": "4K60Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 197.17,
+        "frame_path": "frames\\f0197.17.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 2,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 2",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 197.17,
+        "frame_path": "frames\\f0197.17.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 197.17,
+        "frame_path": "frames\\f0197.17.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 2,
+        "unit": "GB",
+        "raw": "2GB 32( 2GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 197.17,
+        "frame_path": "frames\\f0197.17.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 2,
+        "unit": "GB",
+        "raw": "2GB 32( 2GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 197.17,
+        "frame_path": "frames\\f0197.17.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "五核A55",
+        "unit": "",
+        "raw": "五核A55",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 197.17,
+        "frame_path": "frames\\f0197.17.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 197.17,
+    "last_seen": 197.17,
+    "notes": [
+      {
+        "field": "_口径说明",
+        "note_text": "客服:480Hz指解码；144Hz限1080P输入"
+      }
+    ],
+    "specials": [
+      {
+        "name": "直下式DLED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "红米",
+    "model": "A75",
+    "params": {
+      "价格": {
+        "value": 2899.0,
+        "unit": "元",
+        "raw": "￥2,899.00",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 251.0,
+        "frame_path": "frames\\f0251.00.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "直下式DLED",
+        "unit": "",
+        "raw": "直下式/DLED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 251.0,
+        "frame_path": "frames\\f0251.00.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 0,
+        "unit": "区",
+        "raw": "无独立背光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "无分区",
+        "note": "无独立背光分区（侧光/直下式无控光分区），记为0",
+        "label_text": "背光分区",
+        "source_timestamp": 251.0,
+        "frame_path": "frames\\f0251.00.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 300,
+        "value_min": 200,
+        "unit": "nit",
+        "raw": "200-300 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 200-300 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 251.0,
+        "frame_path": "frames\\f0251.00.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 60,
+        "unit": "Hz",
+        "raw": "4K60Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 251.0,
+        "frame_path": "frames\\f0251.00.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 251.0,
+        "frame_path": "frames\\f0251.00.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 2,
+        "unit": "GB",
+        "raw": "GB 32( 2GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 251.0,
+        "frame_path": "frames\\f0251.00.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A35",
+        "unit": "",
+        "raw": "四核A35",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 251.0,
+        "frame_path": "frames\\f0251.00.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 251.0,
+    "last_seen": 251.0,
+    "notes": [],
+    "specials": [
+      {
+        "name": "直下式DLED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "vidda",
+    "model": "小钢炮 SMini",
+    "params": {
+      "价格": {
+        "value": 2879.08,
+        "unit": "元",
+        "raw": "￥2,879.08",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 295.9,
+        "frame_path": "frames\\f0295.90.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "Mini LED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 295.9,
+        "frame_path": "frames\\f0295.90.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 180,
+        "unit": "区",
+        "raw": "180个背光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "背光分区",
+        "note": "分区类型：背光分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 295.9,
+        "frame_path": "frames\\f0295.90.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 600,
+        "value_min": 400,
+        "unit": "nit",
+        "raw": "400-600 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 400-600 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 295.9,
+        "frame_path": "frames\\f0295.90.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 60,
+        "unit": "Hz",
+        "raw": "4K60Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 295.9,
+        "frame_path": "frames\\f0295.90.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 96.0,
+        "unit": "% DCI-P3",
+        "raw": "96% DCI-P3",
+        "source": "OCR参数卡",
+        "standard": "% DCI-P3",
+        "note": "色域标准 % DCI-P3，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 295.9,
+        "frame_path": "frames\\f0295.90.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 295.9,
+        "frame_path": "frames\\f0295.90.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 295.9,
+        "frame_path": "frames\\f0295.90.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A55",
+        "unit": "",
+        "raw": "四核A55",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 295.9,
+        "frame_path": "frames\\f0295.90.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 295.9,
+    "last_seen": 295.9,
+    "notes": [
+      {
+        "field": "_刷新说明",
+        "note_text": "180Hz高刷 ·HDMI 1080P输入"
+      }
+    ],
+    "specials": [
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "创维",
+    "model": "黑骑士 A5F+",
+    "params": {
+      "价格": {
+        "value": 3034.73,
+        "unit": "元",
+        "raw": "￥3,034.73",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 341.3,
+        "frame_path": "frames\\f0341.30.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "极黑类纸屏",
+        "unit": "",
+        "raw": "极黑广角类纸屏",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 341.3,
+        "frame_path": "frames\\f0341.30.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 600,
+        "value_min": 400,
+        "unit": "nit",
+        "raw": "400-600nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 400-600 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 341.3,
+        "frame_path": "frames\\f0341.30.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 60,
+        "unit": "Hz",
+        "raw": "4K60Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 341.3,
+        "frame_path": "frames\\f0341.30.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 96.0,
+        "unit": "% DCI-P3",
+        "raw": "96% DCI-P3",
+        "source": "OCR参数卡",
+        "standard": "% DCI-P3",
+        "note": "色域标准 % DCI-P3，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 341.3,
+        "frame_path": "frames\\f0341.30.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 4,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 4",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 341.3,
+        "frame_path": "frames\\f0341.30.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 341.3,
+        "frame_path": "frames\\f0341.30.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 341.3,
+        "frame_path": "frames\\f0341.30.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 341.3,
+        "frame_path": "frames\\f0341.30.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 341.3,
+    "last_seen": 341.3,
+    "notes": [
+      {
+        "field": "_刷新说明",
+        "note_text": "144Hz高刷 ·HDMI 1080P输入"
+      }
+    ],
+    "specials": [
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      },
+      {
+        "name": "极黑类纸屏",
+        "type": "屏幕技术",
+        "owner": "创维"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "创维",
+    "model": "A4F Pro",
+    "params": {
+      "价格": {
+        "value": 3015.0,
+        "unit": "元",
+        "raw": "￥3,015.00",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 378.47,
+        "frame_path": "frames\\f0378.47.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "Mini LED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 378.47,
+        "frame_path": "frames\\f0378.47.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 10020,
+        "unit": "区",
+        "raw": "100200级",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": null,
+        "note": "分区类型：None；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 378.47,
+        "frame_path": "frames\\f0378.47.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 600,
+        "value_min": 400,
+        "unit": "nit",
+        "raw": "400-600 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 400-600 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 378.47,
+        "frame_path": "frames\\f0378.47.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 60,
+        "unit": "Hz",
+        "raw": "4K60Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 378.47,
+        "frame_path": "frames\\f0378.47.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 100.0,
+        "unit": "% sRGB",
+        "standard": "% sRGB",
+        "note": "色域标准为 sRGB，与 DCI-P3/BT.2020 非同一量纲，不可直接比较",
+        "raw": "(用户截图确认)",
+        "source": "用户截图确认",
+        "verified_by": "user_screenshot"
+      },
+      "HDMI2.1数量": {
+        "value": 2,
+        "unit": "个",
+        "raw": "(用户截图确认)",
+        "source": "用户截图确认",
+        "verified_by": "user_screenshot"
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 378.47,
+        "frame_path": "frames\\f0378.47.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 2,
+        "unit": "GB",
+        "raw": "(用户截图确认)",
+        "source": "用户截图确认",
+        "verified_by": "user_screenshot"
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "(用户截图确认)",
+        "source": "用户截图确认",
+        "verified_by": "user_screenshot"
+      },
+      "处理器": {
+        "value": "四核A55",
+        "unit": "",
+        "raw": "(用户截图确认)",
+        "source": "用户截图确认",
+        "verified_by": "user_screenshot"
+      },
+      "发声单元": {
+        "value": 2,
+        "unit": "个",
+        "raw": "(用户截图确认)",
+        "source": "用户截图确认",
+        "verified_by": "user_screenshot"
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 378.47,
+    "last_seen": 378.47,
+    "notes": [
+      {
+        "field": "_刷新说明",
+        "note_text": "144Hz高刷 ·HDMI 1080P输入"
+      },
+      {
+        "field": "_口径说明",
+        "note_text": "客服:原生4K60Hz；144Hz限1080P输入"
+      }
+    ],
+    "specials": [
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": [],
+    "verified": true
+  },
+  {
+    "brand": "TCL",
+    "model": "V8M",
+    "params": {
+      "价格": {
+        "value": 3528.24,
+        "unit": "元",
+        "raw": "￥3,528.24",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 410.8,
+        "frame_path": "frames\\f0410.80.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "直下式DLED",
+        "unit": "",
+        "raw": "直下式/DLED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 410.8,
+        "frame_path": "frames\\f0410.80.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 0,
+        "unit": "区",
+        "raw": "无独立背光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "无分区",
+        "note": "无独立背光分区（侧光/直下式无控光分区），记为0",
+        "label_text": "背光分区",
+        "source_timestamp": 410.8,
+        "frame_path": "frames\\f0410.80.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 60,
+        "unit": "Hz",
+        "raw": "4K60Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 410.8,
+        "frame_path": "frames\\f0410.80.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 130.0,
+        "unit": "% BT.709",
+        "raw": "130% BT.709",
+        "source": "OCR参数卡",
+        "ocr_error": true,
+        "note": "画面标注为 130.0%，超过 100% 覆盖率上限，技术上不成立（原图如此，非识别误差），需人工核对",
+        "label_text": "色域",
+        "source_timestamp": 410.8,
+        "frame_path": "frames\\f0410.80.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 2,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 2",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 410.8,
+        "frame_path": "frames\\f0410.80.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 410.8,
+        "frame_path": "frames\\f0410.80.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 2,
+        "unit": "GB",
+        "raw": "2GB 320 2GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 410.8,
+        "frame_path": "frames\\f0410.80.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 2,
+        "unit": "GB",
+        "raw": "2GB 320 2GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 410.8,
+        "frame_path": "frames\\f0410.80.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "五核A55",
+        "unit": "",
+        "raw": "五核A55",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 410.8,
+        "frame_path": "frames\\f0410.80.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 410.8,
+    "last_seen": 410.8,
+    "notes": [],
+    "specials": [
+      {
+        "name": "直下式DLED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "海信",
+    "model": "E3Q",
+    "params": {
+      "价格": {
+        "value": 3528.0,
+        "unit": "元",
+        "raw": "￥3,528.00",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 471.7,
+        "frame_path": "frames\\f0471.70.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "直下式DLED",
+        "unit": "",
+        "raw": "直下式/DLED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 471.7,
+        "frame_path": "frames\\f0471.70.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 0,
+        "unit": "区",
+        "raw": "无独立背光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "无分区",
+        "note": "无独立背光分区（侧光/直下式无控光分区），记为0",
+        "label_text": "背光分区",
+        "source_timestamp": 471.7,
+        "frame_path": "frames\\f0471.70.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 400,
+        "value_min": 300,
+        "unit": "nit",
+        "raw": "300-400 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 300-400 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 471.7,
+        "frame_path": "frames\\f0471.70.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 60,
+        "unit": "Hz",
+        "raw": "4K60Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 471.7,
+        "frame_path": "frames\\f0471.70.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 100.0,
+        "unit": "% BT.709",
+        "raw": "100% BT.709",
+        "source": "OCR参数卡",
+        "standard": "% BT.709",
+        "note": "色域标准 % BT.709，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 471.7,
+        "frame_path": "frames\\f0471.70.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 471.7,
+        "frame_path": "frames\\f0471.70.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 2,
+        "unit": "GB",
+        "raw": "2GB 32 2GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 471.7,
+        "frame_path": "frames\\f0471.70.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 2,
+        "unit": "GB",
+        "raw": "2GB 32 2GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 471.7,
+        "frame_path": "frames\\f0471.70.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A55",
+        "unit": "",
+        "raw": "四核A55",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 471.7,
+        "frame_path": "frames\\f0471.70.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 471.7,
+    "last_seen": 471.7,
+    "notes": [
+      {
+        "field": "_刷新说明",
+        "note_text": "144Hz高刷·HDMI连接PC"
+      }
+    ],
+    "specials": [
+      {
+        "name": "直下式DLED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "红米",
+    "model": "X",
+    "params": {
+      "价格": {
+        "value": 3799.0,
+        "unit": "元",
+        "raw": "￥3,799.00",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 500.9,
+        "frame_path": "frames\\f0500.90.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "Mini LED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 500.9,
+        "frame_path": "frames\\f0500.90.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 512,
+        "unit": "区",
+        "raw": "512个背光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "背光分区",
+        "note": "分区类型：背光分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 500.9,
+        "frame_path": "frames\\f0500.90.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 1500,
+        "value_min": 1100,
+        "unit": "nit",
+        "raw": "1100-1500 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 1100-1500 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 500.9,
+        "frame_path": "frames\\f0500.90.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 144,
+        "unit": "Hz",
+        "raw": "4K144Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 500.9,
+        "frame_path": "frames\\f0500.90.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 94.0,
+        "unit": "% DCI-P3",
+        "raw": "94% DCI-P3",
+        "source": "OCR参数卡",
+        "standard": "% DCI-P3",
+        "note": "色域标准 % DCI-P3，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 500.9,
+        "frame_path": "frames\\f0500.90.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 500.9,
+        "frame_path": "frames\\f0500.90.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 500.9,
+        "frame_path": "frames\\f0500.90.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 500.9,
+        "frame_path": "frames\\f0500.90.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 500.9,
+    "last_seen": 500.9,
+    "notes": [],
+    "specials": [
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "雷鸟",
+    "model": "鹏7 Plus",
+    "params": {
+      "价格": {
+        "value": 3174.9,
+        "unit": "元",
+        "raw": "￥3,174.90",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 548.63,
+        "frame_path": "frames\\f0548.63.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "直下式DLED",
+        "unit": "",
+        "raw": "直下式/DLED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 548.63,
+        "frame_path": "frames\\f0548.63.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 0,
+        "unit": "区",
+        "raw": "无独立背光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "无分区",
+        "note": "无独立背光分区（侧光/直下式无控光分区），记为0",
+        "label_text": "背光分区",
+        "source_timestamp": 548.63,
+        "frame_path": "frames\\f0548.63.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 400,
+        "value_min": 300,
+        "unit": "nit",
+        "raw": "300-400 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 300-400 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 548.63,
+        "frame_path": "frames\\f0548.63.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 180,
+        "unit": "Hz",
+        "raw": "4K180Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 548.63,
+        "frame_path": "frames\\f0548.63.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 94.0,
+        "unit": "% DCI-P3",
+        "raw": "94% DCI-P3",
+        "source": "OCR参数卡",
+        "standard": "% DCI-P3",
+        "note": "色域标准 % DCI-P3，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 548.63,
+        "frame_path": "frames\\f0548.63.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 2,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 2",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 548.63,
+        "frame_path": "frames\\f0548.63.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 548.63,
+        "frame_path": "frames\\f0548.63.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 2,
+        "unit": "GB",
+        "raw": "2GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 548.63,
+        "frame_path": "frames\\f0548.63.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "2GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 548.63,
+        "frame_path": "frames\\f0548.63.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "五核A55",
+        "unit": "",
+        "raw": "五核A55",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 548.63,
+        "frame_path": "frames\\f0548.63.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 548.63,
+    "last_seen": 548.63,
+    "notes": [
+      {
+        "field": "_刷新说明",
+        "note_text": "360Hz全通道疾速高刷"
+      }
+    ],
+    "specials": [
+      {
+        "name": "直下式DLED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "雷鸟",
+    "model": "鹤6 Plus",
+    "params": {
+      "价格": {
+        "value": 4199.0,
+        "unit": "元",
+        "raw": "￥4,199.00",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 575.13,
+        "frame_path": "frames\\f0575.13.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "Mini LED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 575.13,
+        "frame_path": "frames\\f0575.13.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 312,
+        "unit": "区",
+        "raw": "312个万象分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "万象分区",
+        "note": "分区类型：万象分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 575.13,
+        "frame_path": "frames\\f0575.13.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 2000,
+        "value_min": 1500,
+        "unit": "nit",
+        "raw": "1500-2000 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 1500-2000 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 575.13,
+        "frame_path": "frames\\f0575.13.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 180,
+        "unit": "Hz",
+        "raw": "4K180Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 575.13,
+        "frame_path": "frames\\f0575.13.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 575.13,
+        "frame_path": "frames\\f0575.13.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "GB 64( 4GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 575.13,
+        "frame_path": "frames\\f0575.13.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "五核A55",
+        "unit": "",
+        "raw": "五核A55",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 575.13,
+        "frame_path": "frames\\f0575.13.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 575.13,
+    "last_seen": 575.13,
+    "notes": [],
+    "specials": [
+      {
+        "name": "万象分区",
+        "type": "分区类型",
+        "owner": "TCL/雷鸟"
+      },
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "雷鸟",
+    "model": "鹤6Ultra",
+    "params": {
+      "价格": {
+        "value": 4318.76,
+        "unit": "元",
+        "raw": "￥4,318.76",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 621.13,
+        "frame_path": "frames\\f0621.13.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "Mini LED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 621.13,
+        "frame_path": "frames\\f0621.13.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 760,
+        "unit": "区",
+        "raw": "760个万象分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "万象分区",
+        "note": "分区类型：万象分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 621.13,
+        "frame_path": "frames\\f0621.13.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 3000,
+        "value_min": 2000,
+        "unit": "nit",
+        "raw": "2000-3000 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 2000-3000 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 621.13,
+        "frame_path": "frames\\f0621.13.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 150,
+        "unit": "Hz",
+        "raw": "4K150Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 621.13,
+        "frame_path": "frames\\f0621.13.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 4,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 4",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 621.13,
+        "frame_path": "frames\\f0621.13.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 621.13,
+        "frame_path": "frames\\f0621.13.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 621.13,
+        "frame_path": "frames\\f0621.13.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 621.13,
+        "frame_path": "frames\\f0621.13.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 621.13,
+        "frame_path": "frames\\f0621.13.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 621.13,
+    "last_seen": 621.13,
+    "notes": [],
+    "specials": [
+      {
+        "name": "万象分区",
+        "type": "分区类型",
+        "owner": "TCL/雷鸟"
+      },
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "雷鸟",
+    "model": "鹤62026",
+    "params": {
+      "价格": {
+        "value": 4705.0,
+        "unit": "元",
+        "raw": "￥4,705.00",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 694.77,
+        "frame_path": "frames\\f0694.77.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "Mini LED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 694.77,
+        "frame_path": "frames\\f0694.77.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 312,
+        "unit": "区",
+        "raw": "312个万象分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "万象分区",
+        "note": "分区类型：万象分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 694.77,
+        "frame_path": "frames\\f0694.77.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 1500,
+        "value_min": 1100,
+        "unit": "nit",
+        "raw": "1100-1500 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 1100-1500 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 694.77,
+        "frame_path": "frames\\f0694.77.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 144,
+        "unit": "Hz",
+        "raw": "4K144Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 694.77,
+        "frame_path": "frames\\f0694.77.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 96.0,
+        "unit": "% DCI-P3",
+        "raw": "96% DCI-P3",
+        "source": "OCR参数卡",
+        "standard": "% DCI-P3",
+        "note": "色域标准 % DCI-P3，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 694.77,
+        "frame_path": "frames\\f0694.77.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 694.77,
+        "frame_path": "frames\\f0694.77.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 3,
+        "unit": "GB",
+        "raw": "3GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 694.77,
+        "frame_path": "frames\\f0694.77.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "3GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 694.77,
+        "frame_path": "frames\\f0694.77.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 694.77,
+        "frame_path": "frames\\f0694.77.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 694.77,
+    "last_seen": 694.77,
+    "notes": [],
+    "specials": [
+      {
+        "name": "万象分区",
+        "type": "分区类型",
+        "owner": "TCL/雷鸟"
+      },
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "创维",
+    "model": "A6F Ultra",
+    "params": {
+      "价格": {
+        "value": 4728.0,
+        "unit": "元",
+        "raw": "￥4,728.00",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 731.43,
+        "frame_path": "frames\\f0731.43.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "Mini LED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 731.43,
+        "frame_path": "frames\\f0731.43.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 3072,
+        "unit": "区",
+        "raw": "3072个背光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "背光分区",
+        "note": "分区类型：背光分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 731.43,
+        "frame_path": "frames\\f0731.43.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 5000,
+        "value_min": 4000,
+        "unit": "nit",
+        "raw": "4000-5000 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 4000-5000 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 731.43,
+        "frame_path": "frames\\f0731.43.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 144,
+        "unit": "Hz",
+        "raw": "4K144Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 731.43,
+        "frame_path": "frames\\f0731.43.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 99.0,
+        "unit": "% DCI-P3",
+        "raw": "99% DCI-P3",
+        "source": "OCR参数卡",
+        "standard": "% DCI-P3",
+        "note": "色域标准 % DCI-P3，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 731.43,
+        "frame_path": "frames\\f0731.43.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 731.43,
+        "frame_path": "frames\\f0731.43.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 731.43,
+        "frame_path": "frames\\f0731.43.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 731.43,
+        "frame_path": "frames\\f0731.43.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "双核A53+双核A73",
+        "unit": "",
+        "raw": "双核A53+双核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 731.43,
+        "frame_path": "frames\\f0731.43.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 731.43,
+    "last_seen": 731.43,
+    "notes": [
+      {
+        "field": "_刷新说明",
+        "note_text": "300Hz高刷 ·2K模式"
+      },
+      {
+        "field": "_口径说明",
+        "note_text": "客服:原生4K144Hz；300Hz为2K模式"
+      }
+    ],
+    "specials": [
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "华为",
+    "model": "Vision智慧屏6",
+    "params": {
+      "价格": {
+        "value": 4625.45,
+        "unit": "元",
+        "raw": "￥4,625.45",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 792.9,
+        "frame_path": "frames\\f0792.90.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "VA软屏",
+        "unit": "",
+        "raw": "(用户截图确认)",
+        "source": "用户截图确认",
+        "verified_by": "user_screenshot"
+      },
+      "分区数": {
+        "value": 312,
+        "unit": "区",
+        "raw": "312个独立背光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "独立背光分区",
+        "note": "分区类型：独立背光分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 792.9,
+        "frame_path": "frames\\f0792.90.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 2000,
+        "unit": "nit",
+        "raw": "2000nits",
+        "source": "OCR参数卡",
+        "is_range": false,
+        "note": "需注意测试窗口口径（3%/10%窗口 vs 全屏）",
+        "label_text": "峰值亮度",
+        "source_timestamp": 792.9,
+        "frame_path": "frames\\f0792.90.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 144,
+        "unit": "Hz",
+        "raw": "4K144Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 792.9,
+        "frame_path": "frames\\f0792.90.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 98.0,
+        "unit": "% DCI-P3",
+        "raw": "98% DCI-P3",
+        "source": "OCR参数卡",
+        "standard": "% DCI-P3",
+        "note": "色域标准 % DCI-P3，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 792.9,
+        "frame_path": "frames\\f0792.90.jpg",
+        "frame_count": 1
+      },
+      "刷新率_倍频": {
+        "value": 288,
+        "unit": "Hz",
+        "note": "倍频值，非原生刷新率，不可与原生值直接比较",
+        "raw": "(用户截图确认)",
+        "source": "用户截图确认",
+        "verified_by": "user_screenshot"
+      },
+      "HDMI2.1数量": {
+        "value": 64,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 64",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 792.9,
+        "frame_path": "frames\\f0792.90.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 792.9,
+        "frame_path": "frames\\f0792.90.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 8,
+        "unit": "GB",
+        "raw": "(用户截图确认)",
+        "source": "用户截图确认",
+        "verified_by": "user_screenshot"
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "(用户截图确认)",
+        "source": "用户截图确认",
+        "verified_by": "user_screenshot"
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "(用户截图确认)",
+        "source": "用户截图确认",
+        "verified_by": "user_screenshot"
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 792.9,
+    "last_seen": 792.9,
+    "notes": [],
+    "specials": [
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      },
+      {
+        "name": "VA软屏",
+        "type": "屏幕类型",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": [],
+    "verified": true
+  },
+  {
+    "brand": "小米",
+    "model": "S Mini LED",
+    "params": {
+      "价格": {
+        "value": 5099.0,
+        "unit": "元",
+        "raw": "￥5,099.00",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 842.63,
+        "frame_path": "frames\\f0842.63.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "Mini LED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 842.63,
+        "frame_path": "frames\\f0842.63.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 1008,
+        "unit": "区",
+        "raw": "1008个背光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "背光分区",
+        "note": "分区类型：背光分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 842.63,
+        "frame_path": "frames\\f0842.63.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 3000,
+        "value_min": 2000,
+        "unit": "nit",
+        "raw": "2000-3000 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 2000-3000 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 842.63,
+        "frame_path": "frames\\f0842.63.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 144,
+        "unit": "Hz",
+        "raw": "4K144Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 842.63,
+        "frame_path": "frames\\f0842.63.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 94.0,
+        "unit": "% DCI-P3",
+        "raw": "94% DCI-P3",
+        "source": "OCR参数卡",
+        "standard": "% DCI-P3",
+        "note": "色域标准 % DCI-P3，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 842.63,
+        "frame_path": "frames\\f0842.63.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 4,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 4",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 842.63,
+        "frame_path": "frames\\f0842.63.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 842.63,
+        "frame_path": "frames\\f0842.63.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "4GB 64 4GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 842.63,
+        "frame_path": "frames\\f0842.63.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "4GB 64 4GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 842.63,
+        "frame_path": "frames\\f0842.63.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "6。四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 842.63,
+        "frame_path": "frames\\f0842.63.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 842.63,
+    "last_seen": 842.63,
+    "notes": [],
+    "specials": [
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "vidda",
+    "model": "发现 X",
+    "params": {
+      "价格": {
+        "value": 5025.59,
+        "unit": "元",
+        "raw": "￥5,025.59",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 886.33,
+        "frame_path": "frames\\f0886.33.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "Mini LED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 886.33,
+        "frame_path": "frames\\f0886.33.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 1100,
+        "unit": "区",
+        "raw": "1100个聚光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": null,
+        "note": "分区类型：None；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 886.33,
+        "frame_path": "frames\\f0886.33.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 5000,
+        "value_min": 4000,
+        "unit": "nit",
+        "raw": "4000-5000 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 4000-5000 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 886.33,
+        "frame_path": "frames\\f0886.33.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 180,
+        "unit": "Hz",
+        "raw": "4K180Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 886.33,
+        "frame_path": "frames\\f0886.33.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 100.0,
+        "unit": "% DCI-P3",
+        "raw": "100% DCI-P3",
+        "source": "OCR参数卡",
+        "standard": "% DCI-P3",
+        "note": "色域标准 % DCI-P3，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 886.33,
+        "frame_path": "frames\\f0886.33.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 64,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 64",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 886.33,
+        "frame_path": "frames\\f0886.33.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 886.33,
+        "frame_path": "frames\\f0886.33.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "64GB 3GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 886.33,
+        "frame_path": "frames\\f0886.33.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 3,
+        "unit": "GB",
+        "raw": "64GB 3GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 886.33,
+        "frame_path": "frames\\f0886.33.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 886.33,
+        "frame_path": "frames\\f0886.33.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 886.33,
+    "last_seen": 886.33,
+    "notes": [],
+    "specials": [
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "TCL",
+    "model": "T7L Ultra",
+    "params": {
+      "价格": {
+        "value": 5017.15,
+        "unit": "元",
+        "raw": "￥5,017.15",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 936.0,
+        "frame_path": "frames\\f0936.00.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 1248,
+        "unit": "区",
+        "raw": "1248个万象分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "万象分区",
+        "note": "分区类型：万象分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 936.0,
+        "frame_path": "frames\\f0936.00.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 4000,
+        "value_min": 3000,
+        "unit": "nit",
+        "raw": "3000-4000 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 3000-4000 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 936.0,
+        "frame_path": "frames\\f0936.00.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 144,
+        "unit": "Hz",
+        "raw": "4K144Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 936.0,
+        "frame_path": "frames\\f0936.00.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 98.0,
+        "unit": "% DCI-P3",
+        "raw": "98% DCI-P3",
+        "source": "OCR参数卡",
+        "standard": "% DCI-P3",
+        "note": "色域标准 % DCI-P3，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 936.0,
+        "frame_path": "frames\\f0936.00.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 4,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 4",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 936.0,
+        "frame_path": "frames\\f0936.00.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 936.0,
+        "frame_path": "frames\\f0936.00.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 936.0,
+        "frame_path": "frames\\f0936.00.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 936.0,
+        "frame_path": "frames\\f0936.00.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 936.0,
+        "frame_path": "frames\\f0936.00.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 936.0,
+    "last_seen": 936.0,
+    "notes": [],
+    "specials": [
+      {
+        "name": "万象分区",
+        "type": "分区类型",
+        "owner": "TCL/雷鸟"
+      },
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "海信",
+    "model": "小墨E5S",
+    "params": {
+      "价格": {
+        "value": 5277.71,
+        "unit": "元",
+        "raw": "￥5,277.71",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 986.3,
+        "frame_path": "frames\\f0986.30.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "墨晶屏",
+        "unit": "",
+        "raw": "墨晶屏2.0",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 986.3,
+        "frame_path": "frames\\f0986.30.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 1100,
+        "unit": "区",
+        "raw": "1100个背光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "背光分区",
+        "note": "分区类型：背光分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 986.3,
+        "frame_path": "frames\\f0986.30.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 4000,
+        "unit": "nit",
+        "raw": "4000nits",
+        "source": "OCR参数卡",
+        "is_range": false,
+        "note": "需注意测试窗口口径（3%/10%窗口 vs 全屏）",
+        "label_text": "峰值亮度",
+        "source_timestamp": 986.3,
+        "frame_path": "frames\\f0986.30.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 180,
+        "unit": "Hz",
+        "raw": "4K180Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 986.3,
+        "frame_path": "frames\\f0986.30.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 98.0,
+        "unit": "% DCI-P3",
+        "raw": "98% DCI-P3",
+        "source": "OCR参数卡",
+        "standard": "% DCI-P3",
+        "note": "色域标准 % DCI-P3，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 986.3,
+        "frame_path": "frames\\f0986.30.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 986.3,
+        "frame_path": "frames\\f0986.30.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 3,
+        "unit": "GB",
+        "raw": "3GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 986.3,
+        "frame_path": "frames\\f0986.30.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "3GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 986.3,
+        "frame_path": "frames\\f0986.30.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 986.3,
+        "frame_path": "frames\\f0986.30.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 986.3,
+    "last_seen": 986.3,
+    "notes": [],
+    "specials": [
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      },
+      {
+        "name": "墨晶屏",
+        "type": "屏幕技术",
+        "owner": "海信"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "雷鸟",
+    "model": "鹤72026",
+    "params": {
+      "价格": {
+        "value": 5645.9,
+        "unit": "元",
+        "raw": "￥5,645.90",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 1033.13,
+        "frame_path": "frames\\f1033.13.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "Mini LED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 1033.13,
+        "frame_path": "frames\\f1033.13.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 760,
+        "unit": "区",
+        "raw": "760个万象分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "万象分区",
+        "note": "分区类型：万象分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 1033.13,
+        "frame_path": "frames\\f1033.13.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 3000,
+        "value_min": 2000,
+        "unit": "nit",
+        "raw": "2000-3000 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 2000-3000 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 1033.13,
+        "frame_path": "frames\\f1033.13.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 150,
+        "unit": "Hz",
+        "raw": "4K150Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 1033.13,
+        "frame_path": "frames\\f1033.13.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 1033.13,
+        "frame_path": "frames\\f1033.13.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "4GB 64( 4GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 1033.13,
+        "frame_path": "frames\\f1033.13.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "4GB 64( 4GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1033.13,
+        "frame_path": "frames\\f1033.13.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1033.13,
+        "frame_path": "frames\\f1033.13.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 1033.13,
+    "last_seen": 1033.13,
+    "notes": [],
+    "specials": [
+      {
+        "name": "万象分区",
+        "type": "分区类型",
+        "owner": "TCL/雷鸟"
+      },
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "vidda",
+    "model": "发现 X Pro",
+    "params": {
+      "价格": {
+        "value": 5820.46,
+        "unit": "元",
+        "raw": "￥5,820.46",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 1080.77,
+        "frame_path": "frames\\f1080.77.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "Mini LED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 1080.77,
+        "frame_path": "frames\\f1080.77.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 2340,
+        "unit": "区",
+        "raw": "2340个背光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "背光分区",
+        "note": "分区类型：背光分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 1080.77,
+        "frame_path": "frames\\f1080.77.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 4000,
+        "value_min": 3000,
+        "unit": "nit",
+        "raw": "3000-4000 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 3000-4000 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 1080.77,
+        "frame_path": "frames\\f1080.77.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 165,
+        "unit": "Hz",
+        "raw": "4K165Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 1080.77,
+        "frame_path": "frames\\f1080.77.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 4,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 4",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 1080.77,
+        "frame_path": "frames\\f1080.77.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 1080.77,
+        "frame_path": "frames\\f1080.77.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 1080.77,
+        "frame_path": "frames\\f1080.77.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1080.77,
+        "frame_path": "frames\\f1080.77.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1080.77,
+        "frame_path": "frames\\f1080.77.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 1080.77,
+    "last_seen": 1080.77,
+    "notes": [],
+    "specials": [
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "vidda",
+    "model": "大玩家 G7",
+    "params": {
+      "价格": {
+        "value": 5999.3,
+        "unit": "元",
+        "raw": "￥5,999.30",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 1126.5,
+        "frame_path": "frames\\f1126.50.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "黑曜屏",
+        "unit": "",
+        "raw": "黑曜屏 Pro",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 1126.5,
+        "frame_path": "frames\\f1126.50.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 2592,
+        "unit": "区",
+        "raw": "2592个",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": null,
+        "note": "分区类型：None；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 1126.5,
+        "frame_path": "frames\\f1126.50.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 7300,
+        "unit": "nit",
+        "raw": "7300nits (宣称)",
+        "source": "OCR参数卡",
+        "is_range": false,
+        "note": "需注意测试窗口口径（3%/10%窗口 vs 全屏）",
+        "label_text": "峰值亮度",
+        "source_timestamp": 1126.5,
+        "frame_path": "frames\\f1126.50.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 180,
+        "unit": "Hz",
+        "raw": "4K180Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 1126.5,
+        "frame_path": "frames\\f1126.50.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 100.0,
+        "unit": "% DCI-P3",
+        "raw": "100% DCI-P3",
+        "source": "OCR参数卡",
+        "standard": "% DCI-P3",
+        "note": "色域标准 % DCI-P3，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 1126.5,
+        "frame_path": "frames\\f1126.50.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 1126.5,
+        "frame_path": "frames\\f1126.50.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 1126.5,
+    "last_seen": 1126.5,
+    "notes": [
+      {
+        "field": "_宣称标记",
+        "note_text": "该数值为厂商宣称值而非实测值"
+      },
+      {
+        "field": "_价格口径",
+        "note_text": "参考价为国补后价格,需符合地区补贴条件"
+      }
+    ],
+    "specials": [
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      },
+      {
+        "name": "黑曜屏",
+        "type": "屏幕技术",
+        "owner": "vidda"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "TCL",
+    "model": "T7M Pro",
+    "params": {
+      "价格": {
+        "value": 6080.12,
+        "unit": "元",
+        "raw": "￥6,080.12",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 1249.77,
+        "frame_path": "frames\\f1249.77.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "QD-Mini LED",
+        "unit": "",
+        "raw": "SQD-MiniLED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 1249.77,
+        "frame_path": "frames\\f1249.77.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 760,
+        "unit": "区",
+        "raw": "760个万象分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "万象分区",
+        "note": "分区类型：万象分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 1249.77,
+        "frame_path": "frames\\f1249.77.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 3000,
+        "value_min": 2000,
+        "unit": "nit",
+        "raw": "2000-3000 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 2000-3000 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 1249.77,
+        "frame_path": "frames\\f1249.77.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 150,
+        "unit": "Hz",
+        "raw": "4K150Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 1249.77,
+        "frame_path": "frames\\f1249.77.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 100.0,
+        "unit": "% BT.2020",
+        "raw": "100% BT.2020",
+        "source": "OCR参数卡",
+        "standard": "% BT.2020",
+        "note": "色域标准 % BT.2020，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 1249.77,
+        "frame_path": "frames\\f1249.77.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 3,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 3",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 1249.77,
+        "frame_path": "frames\\f1249.77.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 1249.77,
+        "frame_path": "frames\\f1249.77.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 3,
+        "unit": "GB",
+        "raw": "3GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 1249.77,
+        "frame_path": "frames\\f1249.77.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "3GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1249.77,
+        "frame_path": "frames\\f1249.77.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1249.77,
+        "frame_path": "frames\\f1249.77.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 1249.77,
+    "last_seen": 1249.77,
+    "notes": [],
+    "specials": [
+      {
+        "name": "万象分区",
+        "type": "分区类型",
+        "owner": "TCL/雷鸟"
+      },
+      {
+        "name": "QD-Mini LED",
+        "type": "屏幕技术",
+        "owner": "通用"
+      },
+      {
+        "name": "SQD-Mini LED",
+        "type": "屏幕技术",
+        "owner": "TCL"
+      },
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "创维",
+    "model": "壁纸电视A7H",
+    "params": {
+      "价格": {
+        "value": 6351.76,
+        "unit": "元",
+        "raw": "￥6,351.76",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 1308.77,
+        "frame_path": "frames\\f1308.77.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "Mini LED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 1308.77,
+        "frame_path": "frames\\f1308.77.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 336,
+        "unit": "区",
+        "raw": "336个背光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "背光分区",
+        "note": "分区类型：背光分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 1308.77,
+        "frame_path": "frames\\f1308.77.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 2000,
+        "value_min": 1500,
+        "unit": "nit",
+        "raw": "1500-2000 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 1500-2000 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 1308.77,
+        "frame_path": "frames\\f1308.77.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 60,
+        "unit": "Hz",
+        "raw": "4K60Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 1308.77,
+        "frame_path": "frames\\f1308.77.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 99.0,
+        "unit": "% DCI-P3",
+        "raw": "99% DCI-P3",
+        "source": "OCR参数卡",
+        "standard": "% DCI-P3",
+        "note": "色域标准 % DCI-P3，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 1308.77,
+        "frame_path": "frames\\f1308.77.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 64,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 64",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 1308.77,
+        "frame_path": "frames\\f1308.77.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 1308.77,
+        "frame_path": "frames\\f1308.77.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "64GB 4GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 1308.77,
+        "frame_path": "frames\\f1308.77.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "64GB 4GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1308.77,
+        "frame_path": "frames\\f1308.77.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "八核A55",
+        "unit": "",
+        "raw": "l。八核A55",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1308.77,
+        "frame_path": "frames\\f1308.77.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 1308.77,
+    "last_seen": 1308.77,
+    "notes": [
+      {
+        "field": "_刷新说明",
+        "note_text": "高刷2K 165Hz · PC端720P 300Hz"
+      },
+      {
+        "field": "_口径说明",
+        "note_text": "客服:高刷2K 165HZ;PC端720P 300HZ"
+      }
+    ],
+    "specials": [
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "海信",
+    "model": "小墨E5S Pro",
+    "params": {
+      "价格": {
+        "value": 6798.99,
+        "unit": "元",
+        "raw": "￥6,798.99",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 1353.67,
+        "frame_path": "frames\\f1353.67.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "RGB-MiniLED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 1353.67,
+        "frame_path": "frames\\f1353.67.jpg",
+        "frame_count": 1
+      },
+      "控色区": {
+        "value": 2640,
+        "unit": "个控色区",
+        "raw": "2640个",
+        "source": "OCR参数卡",
+        "note": "玲珑控色区（海信专属口径），与背光分区算法不同，不可与背光分区直接比较",
+        "label_text": "玲珑控色区",
+        "source_timestamp": 1353.67,
+        "frame_path": "frames\\f1353.67.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 3000,
+        "value_min": 2000,
+        "unit": "nit",
+        "raw": "2000-3000 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 2000-3000 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 1353.67,
+        "frame_path": "frames\\f1353.67.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 180,
+        "unit": "Hz",
+        "raw": "4K180Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 1353.67,
+        "frame_path": "frames\\f1353.67.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 100.0,
+        "unit": "% BT.2020",
+        "raw": "100% BT.2020",
+        "source": "OCR参数卡",
+        "standard": "% BT.2020",
+        "note": "色域标准 % BT.2020，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 1353.67,
+        "frame_path": "frames\\f1353.67.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 64,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 64",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 1353.67,
+        "frame_path": "frames\\f1353.67.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 1353.67,
+        "frame_path": "frames\\f1353.67.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "64GB 3GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 1353.67,
+        "frame_path": "frames\\f1353.67.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 3,
+        "unit": "GB",
+        "raw": "64GB 3GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1353.67,
+        "frame_path": "frames\\f1353.67.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "D四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1353.67,
+        "frame_path": "frames\\f1353.67.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 1353.67,
+    "last_seen": 1353.67,
+    "notes": [],
+    "specials": [
+      {
+        "name": "玲珑控色区",
+        "type": "画质技术",
+        "owner": "海信"
+      },
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "小米",
+    "model": "S Pro Mini LED",
+    "params": {
+      "价格": {
+        "value": 6799.0,
+        "unit": "元",
+        "raw": "￥6,799.00",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 1412.4,
+        "frame_path": "frames\\f1412.40.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "Mini LED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 1412.4,
+        "frame_path": "frames\\f1412.40.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 2304,
+        "unit": "区",
+        "raw": "2304个背光分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "背光分区",
+        "note": "分区类型：背光分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 1412.4,
+        "frame_path": "frames\\f1412.40.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 5000,
+        "unit": "nit",
+        "raw": "5000+ nits",
+        "source": "OCR参数卡",
+        "is_range": false,
+        "note": "需注意测试窗口口径（3%/10%窗口 vs 全屏）",
+        "label_text": "亮度范围",
+        "source_timestamp": 1412.4,
+        "frame_path": "frames\\f1412.40.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 165,
+        "unit": "Hz",
+        "raw": "4K165Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 1412.4,
+        "frame_path": "frames\\f1412.40.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 95.0,
+        "unit": "% DCI-P3",
+        "raw": "95% DCI-P3",
+        "source": "OCR参数卡",
+        "standard": "% DCI-P3",
+        "note": "色域标准 % DCI-P3，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 1412.4,
+        "frame_path": "frames\\f1412.40.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 4,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 4",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 1412.4,
+        "frame_path": "frames\\f1412.40.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 1412.4,
+        "frame_path": "frames\\f1412.40.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 1412.4,
+        "frame_path": "frames\\f1412.40.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1412.4,
+        "frame_path": "frames\\f1412.40.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1412.4,
+        "frame_path": "frames\\f1412.40.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 1412.4,
+    "last_seen": 1412.4,
+    "notes": [],
+    "specials": [
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "雷鸟",
+    "model": "鹤7 Pro",
+    "params": {
+      "价格": {
+        "value": 6748.91,
+        "unit": "元",
+        "raw": "￥6,748.91",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 1462.27,
+        "frame_path": "frames\\f1462.27.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "Mini LED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 1462.27,
+        "frame_path": "frames\\f1462.27.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 2176,
+        "unit": "区",
+        "raw": "2176个万象分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "万象分区",
+        "note": "分区类型：万象分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 1462.27,
+        "frame_path": "frames\\f1462.27.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 5000,
+        "unit": "nit",
+        "raw": "5000+ nits",
+        "source": "OCR参数卡",
+        "is_range": false,
+        "note": "需注意测试窗口口径（3%/10%窗口 vs 全屏）",
+        "label_text": "亮度范围",
+        "source_timestamp": 1462.27,
+        "frame_path": "frames\\f1462.27.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 150,
+        "unit": "Hz",
+        "raw": "4K150Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 1462.27,
+        "frame_path": "frames\\f1462.27.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 3,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 3",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 1462.27,
+        "frame_path": "frames\\f1462.27.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 1462.27,
+        "frame_path": "frames\\f1462.27.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 3,
+        "unit": "GB",
+        "raw": "3GB 4GB 64",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 1462.27,
+        "frame_path": "frames\\f1462.27.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "3GB 4GB 64",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1462.27,
+        "frame_path": "frames\\f1462.27.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "。四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1462.27,
+        "frame_path": "frames\\f1462.27.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 1462.27,
+    "last_seen": 1462.27,
+    "notes": [],
+    "specials": [
+      {
+        "name": "万象分区",
+        "type": "分区类型",
+        "owner": "TCL/雷鸟"
+      },
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "TCL",
+    "model": "T7M Ultra",
+    "params": {
+      "价格": {
+        "value": 7528.23,
+        "unit": "元",
+        "raw": "￥7,528.23",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 1519.9,
+        "frame_path": "frames\\f1519.90.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "QD-Mini LED",
+        "unit": "",
+        "raw": "SQD-MiniLED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 1519.9,
+        "frame_path": "frames\\f1519.90.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 1352,
+        "unit": "区",
+        "raw": "1352个万象分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "万象分区",
+        "note": "分区类型：万象分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 1519.9,
+        "frame_path": "frames\\f1519.90.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 4000,
+        "value_min": 3000,
+        "unit": "nit",
+        "raw": "3000-4000 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 3000-4000 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 1519.9,
+        "frame_path": "frames\\f1519.90.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 150,
+        "unit": "Hz",
+        "raw": "4K150Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 1519.9,
+        "frame_path": "frames\\f1519.90.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 100.0,
+        "unit": "% BT.2020",
+        "raw": "100% BT.2020",
+        "source": "OCR参数卡",
+        "standard": "% BT.2020",
+        "note": "色域标准 % BT.2020，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 1519.9,
+        "frame_path": "frames\\f1519.90.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 1519.9,
+        "frame_path": "frames\\f1519.90.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 3,
+        "unit": "GB",
+        "raw": "3GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 1519.9,
+        "frame_path": "frames\\f1519.90.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "3GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1519.9,
+        "frame_path": "frames\\f1519.90.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1519.9,
+        "frame_path": "frames\\f1519.90.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 1519.9,
+    "last_seen": 1519.9,
+    "notes": [],
+    "specials": [
+      {
+        "name": "万象分区",
+        "type": "分区类型",
+        "owner": "TCL/雷鸟"
+      },
+      {
+        "name": "QD-Mini LED",
+        "type": "屏幕技术",
+        "owner": "通用"
+      },
+      {
+        "name": "SQD-Mini LED",
+        "type": "屏幕技术",
+        "owner": "TCL"
+      },
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "创维",
+    "model": "壁纸电视A8H",
+    "params": {
+      "价格": {
+        "value": 7966.67,
+        "unit": "元",
+        "raw": "￥7,966.67",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 1553.87,
+        "frame_path": "frames\\f1553.87.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 3072,
+        "unit": "区",
+        "raw": "3072个物理分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": null,
+        "note": "分区类型：None；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 1553.87,
+        "frame_path": "frames\\f1553.87.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 5500,
+        "unit": "nit",
+        "raw": "5500nits",
+        "source": "OCR参数卡",
+        "is_range": false,
+        "note": "需注意测试窗口口径（3%/10%窗口 vs 全屏）",
+        "label_text": "峰值亮度",
+        "source_timestamp": 1553.87,
+        "frame_path": "frames\\f1553.87.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 150,
+        "unit": "Hz",
+        "raw": "4K150Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 1553.87,
+        "frame_path": "frames\\f1553.87.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 110.0,
+        "unit": "% DCI-P3",
+        "raw": "110% DCI-P3",
+        "source": "OCR参数卡",
+        "ocr_error": true,
+        "note": "画面标注为 110.0%，超过 100% 覆盖率上限，技术上不成立（原图如此，非识别误差），需人工核对",
+        "label_text": "色域",
+        "source_timestamp": 1553.87,
+        "frame_path": "frames\\f1553.87.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 4,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 4",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 1553.87,
+        "frame_path": "frames\\f1553.87.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 1553.87,
+        "frame_path": "frames\\f1553.87.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "4GB 4GB 640",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 1553.87,
+        "frame_path": "frames\\f1553.87.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "4GB 4GB 640",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1553.87,
+        "frame_path": "frames\\f1553.87.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "l四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1553.87,
+        "frame_path": "frames\\f1553.87.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 1553.87,
+    "last_seen": 1553.87,
+    "notes": [],
+    "specials": [
+      {
+        "name": "QD-Mini LED",
+        "type": "屏幕技术",
+        "owner": "通用"
+      },
+      {
+        "name": "SQD-Mini LED",
+        "type": "屏幕技术",
+        "owner": "TCL"
+      },
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "TCL",
+    "model": "Q9M",
+    "params": {
+      "价格": {
+        "value": 7999.35,
+        "unit": "元",
+        "raw": "￥7,999.35",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 1606.57,
+        "frame_path": "frames\\f1606.57.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "QD-Mini LED",
+        "unit": "",
+        "raw": "SQD-MiniLED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 1606.57,
+        "frame_path": "frames\\f1606.57.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 1248,
+        "unit": "区",
+        "raw": "1248个万象分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "万象分区",
+        "note": "分区类型：万象分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 1606.57,
+        "frame_path": "frames\\f1606.57.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 4000,
+        "value_min": 3000,
+        "unit": "nit",
+        "raw": "3000-4000 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 3000-4000 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 1606.57,
+        "frame_path": "frames\\f1606.57.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 150,
+        "unit": "Hz",
+        "raw": "4K150Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 1606.57,
+        "frame_path": "frames\\f1606.57.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 100.0,
+        "unit": "% BT.2020",
+        "raw": "100% BT.2020",
+        "source": "OCR参数卡",
+        "standard": "% BT.2020",
+        "note": "色域标准 % BT.2020，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 1606.57,
+        "frame_path": "frames\\f1606.57.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 1606.57,
+        "frame_path": "frames\\f1606.57.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 3,
+        "unit": "GB",
+        "raw": "3GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 1606.57,
+        "frame_path": "frames\\f1606.57.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "3GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1606.57,
+        "frame_path": "frames\\f1606.57.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 1606.57,
+    "last_seen": 1606.57,
+    "notes": [],
+    "specials": [
+      {
+        "name": "万象分区",
+        "type": "分区类型",
+        "owner": "TCL/雷鸟"
+      },
+      {
+        "name": "QD-Mini LED",
+        "type": "屏幕技术",
+        "owner": "通用"
+      },
+      {
+        "name": "SQD-Mini LED",
+        "type": "屏幕技术",
+        "owner": "TCL"
+      },
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "TCL",
+    "model": "Q9M Pro",
+    "params": {
+      "价格": {
+        "value": 9410.58,
+        "unit": "元",
+        "raw": "￥9,410.58",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 1682.63,
+        "frame_path": "frames\\f1682.63.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "QD-Mini LED",
+        "unit": "",
+        "raw": "SQD-MiniLED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 1682.63,
+        "frame_path": "frames\\f1682.63.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 2312,
+        "unit": "区",
+        "raw": "2312个万象分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "万象分区",
+        "note": "分区类型：万象分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 1682.63,
+        "frame_path": "frames\\f1682.63.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 5000,
+        "unit": "nit",
+        "raw": "5000+ nits",
+        "source": "OCR参数卡",
+        "is_range": false,
+        "note": "需注意测试窗口口径（3%/10%窗口 vs 全屏）",
+        "label_text": "亮度范围",
+        "source_timestamp": 1682.63,
+        "frame_path": "frames\\f1682.63.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 150,
+        "unit": "Hz",
+        "raw": "4K150Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 1682.63,
+        "frame_path": "frames\\f1682.63.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 100.0,
+        "unit": "% BT.2020",
+        "raw": "100% BT.2020",
+        "source": "OCR参数卡",
+        "standard": "% BT.2020",
+        "note": "色域标准 % BT.2020，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 1682.63,
+        "frame_path": "frames\\f1682.63.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 1682.63,
+        "frame_path": "frames\\f1682.63.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 1682.63,
+        "frame_path": "frames\\f1682.63.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1682.63,
+        "frame_path": "frames\\f1682.63.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1682.63,
+        "frame_path": "frames\\f1682.63.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 1682.63,
+    "last_seen": 1682.63,
+    "notes": [],
+    "specials": [
+      {
+        "name": "万象分区",
+        "type": "分区类型",
+        "owner": "TCL/雷鸟"
+      },
+      {
+        "name": "QD-Mini LED",
+        "type": "屏幕技术",
+        "owner": "通用"
+      },
+      {
+        "name": "SQD-Mini LED",
+        "type": "屏幕技术",
+        "owner": "TCL"
+      },
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "海信",
+    "model": "E8S",
+    "params": {
+      "价格": {
+        "value": 10649.1,
+        "unit": "元",
+        "raw": "￥10,649.10",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 1745.33,
+        "frame_path": "frames\\f1745.33.jpg",
+        "frame_count": 1
+      },
+      "屏幕": {
+        "value": "Mini LED",
+        "unit": "",
+        "raw": "RGB-MiniLED",
+        "source": "OCR参数卡",
+        "label_text": "屏幕",
+        "source_timestamp": 1745.33,
+        "frame_path": "frames\\f1745.33.jpg",
+        "frame_count": 1
+      },
+      "控色区": {
+        "value": 4200,
+        "unit": "个控色区",
+        "raw": "4200个",
+        "source": "OCR参数卡",
+        "note": "玲珑控色区（海信专属口径），与背光分区算法不同，不可与背光分区直接比较",
+        "label_text": "玲珑控色区",
+        "source_timestamp": 1745.33,
+        "frame_path": "frames\\f1745.33.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 5000,
+        "value_min": 4000,
+        "unit": "nit",
+        "raw": "4000-5000 nits",
+        "source": "OCR参数卡",
+        "is_range": true,
+        "note": "标称区间 4000-5000 nit，取上限；注意测试窗口口径",
+        "label_text": "亮度范围",
+        "source_timestamp": 1745.33,
+        "frame_path": "frames\\f1745.33.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 180,
+        "unit": "Hz",
+        "raw": "4K180Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 1745.33,
+        "frame_path": "frames\\f1745.33.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 100.0,
+        "unit": "% BT.2020",
+        "raw": "100% BT.2020",
+        "source": "OCR参数卡",
+        "standard": "% BT.2020",
+        "note": "色域标准 % BT.2020，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 1745.33,
+        "frame_path": "frames\\f1745.33.jpg",
+        "frame_count": 1
+      },
+      "HDMI2.1数量": {
+        "value": 4,
+        "unit": "个",
+        "raw": "HDMI2.1发声单元处理器 4",
+        "source": "OCR参数卡(兜底)",
+        "hdmi_ver": "2.1",
+        "source_timestamp": 1745.33,
+        "frame_path": "frames\\f1745.33.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 1745.33,
+        "frame_path": "frames\\f1745.33.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 1745.33,
+        "frame_path": "frames\\f1745.33.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "4GB 64GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1745.33,
+        "frame_path": "frames\\f1745.33.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1745.33,
+        "frame_path": "frames\\f1745.33.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 1745.33,
+    "last_seen": 1745.33,
+    "notes": [],
+    "specials": [
+      {
+        "name": "玲珑控色区",
+        "type": "画质技术",
+        "owner": "海信"
+      },
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  },
+  {
+    "brand": "TCL",
+    "model": "Q10M",
+    "params": {
+      "价格": {
+        "value": 9953.0,
+        "unit": "元",
+        "raw": "￥9,953.00",
+        "source": "OCR参数卡",
+        "note": "参考价为国补后价格，需符合地区补贴条件",
+        "label_text": "参考价",
+        "source_timestamp": 1820.53,
+        "frame_path": "frames\\f1820.53.jpg",
+        "frame_count": 1
+      },
+      "分区数": {
+        "value": 2584,
+        "unit": "区",
+        "raw": "2584个万象分区",
+        "source": "OCR参数卡",
+        "exact": true,
+        "zone_type": "万象分区",
+        "note": "分区类型：万象分区；需确认单/双/多重分区，算法不同不可直接比较",
+        "label_text": "背光分区",
+        "source_timestamp": 1820.53,
+        "frame_path": "frames\\f1820.53.jpg",
+        "frame_count": 1
+      },
+      "峰值亮度": {
+        "value": 6000,
+        "unit": "nit",
+        "raw": "6000nits",
+        "source": "OCR参数卡",
+        "is_range": false,
+        "note": "需注意测试窗口口径（3%/10%窗口 vs 全屏）",
+        "label_text": "峰值亮度",
+        "source_timestamp": 1820.53,
+        "frame_path": "frames\\f1820.53.jpg",
+        "frame_count": 1
+      },
+      "刷新率": {
+        "value": 150,
+        "unit": "Hz",
+        "raw": "4K150Hz",
+        "source": "OCR参数卡",
+        "is_native": true,
+        "note": "原生 4K 刷新率",
+        "label_text": "原生刷新",
+        "source_timestamp": 1820.53,
+        "frame_path": "frames\\f1820.53.jpg",
+        "frame_count": 1
+      },
+      "色域": {
+        "value": 100.0,
+        "unit": "% BT.2020",
+        "raw": "100% BT.2020",
+        "source": "OCR参数卡",
+        "standard": "% BT.2020",
+        "note": "色域标准 % BT.2020，与其他标准不可直接比较",
+        "label_text": "色域",
+        "source_timestamp": 1820.53,
+        "frame_path": "frames\\f1820.53.jpg",
+        "frame_count": 1
+      },
+      "屏幕尺寸": {
+        "value": 75,
+        "unit": "英寸",
+        "raw": "75英寸",
+        "source": "OCR参数卡(兜底)",
+        "source_timestamp": 1820.53,
+        "frame_path": "frames\\f1820.53.jpg",
+        "frame_count": 1
+      },
+      "内存": {
+        "value": 64,
+        "unit": "GB",
+        "raw": "64GB 4GB",
+        "source": "OCR参数卡底部栏",
+        "note": "由底部横排栏 'NGB/MGB' 复合值拆分",
+        "source_timestamp": 1820.53,
+        "frame_path": "frames\\f1820.53.jpg",
+        "frame_count": 1
+      },
+      "存储": {
+        "value": 4,
+        "unit": "GB",
+        "raw": "64GB 4GB",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1820.53,
+        "frame_path": "frames\\f1820.53.jpg",
+        "frame_count": 1
+      },
+      "处理器": {
+        "value": "四核A73",
+        "unit": "",
+        "raw": "l。四核A73",
+        "source": "OCR参数卡底部栏",
+        "source_timestamp": 1820.53,
+        "frame_path": "frames\\f1820.53.jpg",
+        "frame_count": 1
+      }
+    },
+    "frame_count": 1,
+    "first_seen": 1820.53,
+    "last_seen": 1820.53,
+    "notes": [],
+    "specials": [
+      {
+        "name": "万象分区",
+        "type": "分区类型",
+        "owner": "TCL/雷鸟"
+      },
+      {
+        "name": "QD-Mini LED",
+        "type": "屏幕技术",
+        "owner": "通用"
+      },
+      {
+        "name": "SQD-Mini LED",
+        "type": "屏幕技术",
+        "owner": "TCL"
+      },
+      {
+        "name": "Mini LED",
+        "type": "背光技术",
+        "owner": "通用"
+      }
+    ],
+    "conflicts": []
+  }
+]
